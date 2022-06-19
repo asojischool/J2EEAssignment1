@@ -32,7 +32,7 @@ public class registerUser extends HttpServlet {
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String role = request.getParameter("role");
+		String role = request.getParameter("radio1");
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); 
