@@ -8,12 +8,14 @@
 </head>
 <body>
     <h1>Register</h1>
-    <form action="/J2EEAssignment1/registerUser" method="post">
+    <form action="/CA1Assignment/registerUser" method="post">
 	
-		Username: <input name="loginid" type='text'> <br>
+		Username: <input name="username" type='text'> <br>
         Email: <input name="email" type='text'> <br>
 		Password: <input name="password" type='password'> <br>
-	
+		<input type="radio" name="radio1" value="Public User">Public User
+		<input type="radio" name="radio1" value="Business Owner">Business Owner<br>
+		
 	<input type="submit" value="Login" name="btnSubmit">
 	</form>
 </body>
