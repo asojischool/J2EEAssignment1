@@ -13,7 +13,7 @@
 		Username: <input name="loginid" type='text'> <br>
         Email: <input name="email" type='text'> <br>
 		Password: <input name="password" type='password'> <br>
-		
+		test2
 	<input type="submit" value="Login" name="btnSubmit">
 	</form>
 </body>
