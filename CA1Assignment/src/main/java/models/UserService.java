@@ -49,4 +49,26 @@ public class UserService {
 		
 		return loggedInUser;
 	}
+	
+	public User registerUser(String username, String password, String role, String email) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver"); 
+			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
+			Connection conn = DriverManager.getConnection(connURL);
+			Statement stmt = conn.createStatement();
+			String sqlStr = "INSERT INTO User(username, password, role, email) VALUES (?, ?, ?, ?)";
+			PreparedStatement ps = conn.prepareStatement(sqlStr);
+			ps.setString(1, username);
+			ps.setString(2, password);
+			ps.setString(3, role);
+			ps.setString(4, email);
+			int numRowsAffected = ps.executeUpdate();
+			
+			conn.close();
+			
+			} catch (Exception e) {
+			System.err.println("Error :" + e);
+			}
+	}
+	}
 }
