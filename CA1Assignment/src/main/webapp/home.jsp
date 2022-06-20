@@ -15,18 +15,15 @@
 
 </head>
 <body>
-	<%-- <%@page import="models.User"%>
+	<%@page import="models.User"%>
+	<%@page import="models.Category"%>
+	<%@page import="java.util.ArrayList"%>%>
+	<jsp:include page="/getCategory" />
 	<%
+	ArrayList<Category> categories = (ArrayList<Category>) session.getAttribute("sessCategories");
 	Boolean authorized = (Boolean) session.getAttribute("authorized");
 	User user = (User) session.getAttribute("sessUser");
-	System.out.println(user.getUsername());
 	%>
-	<h1>
-		Hello
-		<%=user.getUsername()%>
-		I am
-		<%=authorized%>ly authorized
-	</h1> --%>
 
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
@@ -67,56 +64,37 @@
 
 		<div class="py-5 bg-light">
 			<div class="container">
-
 				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+					<%
+					for (Category category : categories) {
+						int id = category.getCategoryID();
+						String image = category.getCategoryImage();
+						String name = category.getCategoryName();
+						String description = category.getCategoryDescription();
+					%>
 					<div class="col">
 						<div class="card shadow-sm">
-							<img class="card-img-top" alt="attraction"
-								src="https://www.letsgotoursingapore.com/wp-content/uploads/LGC-main-pic-300x225.jpg">
+							<img class="card-img-top" alt="attraction" src=<%=image%>>
 							<div class="card-body">
-								<h3>Cooking Tours</h3>
-								<p class="card-text">More than just a cooking class, these
-									are hands-on culinary experiences that serve up great flavours
-									and lots of fun! Delve into our food culture & learn how to
-									cook local favourites with our expert chef!</p>
-								<button type="button" class="btn btn-success btn-lg">Let's
-									Go</button>
+								<h3><%=name%>
+									Tours
+								</h3>
+								<p class="card-text"><%=description%></p>
+								<form></form>
+								<a class="btn btn-success btn-lg"
+									href="getTours?categoryID=<%=id%>>" role="button">Let's
+									Go</a>
 							</div>
 						</div>
 					</div>
-					<div class="col">
-						<div class="card shadow-sm">
-							<img class="card-img-top" alt="attraction"
-								src="https://www.letsgotoursingapore.com/wp-content/uploads/Kelong-main-pic-300x225.jpg">
-							<div class="card-body">
-								<h3>Boat Tours</h3>
-								<p class="card-text">Take on the seas and rediscover
-									Singapore from a different perspective! Discover the North
-									Eastern Banks of Singapore, be in touch with nature and get
-									upclose to Kelongs & Fish Farms.</p>
-								<button type="button" class="btn btn-success btn-lg">Let's
-									Go</button>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card shadow-sm">
-							<img class="card-img-top" alt="attraction"
-								src="https://www.letsgotoursingapore.com/wp-content/uploads/LGB-main-300x225.jpg">
-							<div class="card-body">
-								<h3>Bike Tours</h3>
-								<p class="card-text">Explore Singapore on carefully-designed
-									routes with friendly local guides. With the wind in your hair,
-									get behind the handlebar to learn a little history and soak in
-									the city's breathtaking sights!</p>
-								<button type="button" class="btn btn-success btn-lg">Let's
-									Go</button>
-							</div>
-						</div>
-					</div>
+					<%
+					}
+					%>
 				</div>
 			</div>
 		</div>
+
 	</main>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
 		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

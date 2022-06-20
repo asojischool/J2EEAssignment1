@@ -70,5 +70,4 @@ public class UserService {
 			System.err.println("Error :" + e);
 			}
 	}
-	}
 }
