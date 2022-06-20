@@ -1,11 +1,17 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import models.Tour;
+import models.TourService;
 
 /**
  * Servlet implementation class getTours
@@ -26,8 +32,14 @@ public class getTours extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int categoryID = Integer.parseInt(request.getParameter("categoryID"));
+		TourService tourService = new TourService();
+		ArrayList<Tour> tours = tourService.getToursByCategory(categoryID);
+
+		HttpSession session = request.getSession();
+		session.setAttribute("sessTours", tours);
+		session.setAttribute("sessCategoryID", categoryID);
+		response.sendRedirect("tours.jsp");
 	}
 
 	/**

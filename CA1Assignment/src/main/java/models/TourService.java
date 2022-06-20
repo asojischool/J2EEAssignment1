@@ -1,41 +1,82 @@
 package models;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.sql.*;
+import java.util.ArrayList;
 
-/**
- * Servlet implementation class tourService
- */
-@WebServlet("/tourService")
-public class TourService extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public TourService() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+public class TourService {
+	public ArrayList<Tour> getTours() {
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int categoryID = Integer.parseInt(request.getParameter("categoryID"));
-		
+		ArrayList<Tour> tours = new ArrayList<Tour>();
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
+			Connection conn = DriverManager.getConnection(connURL);
+
+			Statement stmt = conn.createStatement();
+
+			String sqlStr = "SELECT * FROM tours";
+
+			ResultSet rs = stmt.executeQuery(sqlStr);
+			// check resultset
+
+			while (rs.next()) {
+				int dbID = rs.getInt("tour_id");
+				String dbName = rs.getString("tour_name");
+				String dbBriefDescription = rs.getString("brief_description");
+				String dbFullDescription = rs.getString("detail_description");
+				int dbPrice = rs.getInt("price");
+				int dbAvailableSlots = rs.getInt("available_slots");
+				int dbCategoryID = rs.getInt("tour_category_id");
+				String dbImage = rs.getString("image_location");
+				tours.add(new Tour(dbID, dbName, dbBriefDescription, dbFullDescription, dbPrice, dbAvailableSlots,
+						dbCategoryID, dbImage));
+			}
+
+			conn.close();
+
+		} catch (Exception e) {
+			System.out.println("Error :" + e);
+		}
+
+		return tours;
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+	public ArrayList<Tour> getToursByCategory(int categoryID) {
 
+		ArrayList<Tour> tours = new ArrayList<Tour>();
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
+			Connection conn = DriverManager.getConnection(connURL);
+
+			String sqlStr = "SELECT * FROM tour WHERE tour_category_id=?";
+			PreparedStatement ps = conn.prepareStatement(sqlStr);
+			ps.setInt(1, categoryID);
+			ResultSet rs = ps.executeQuery();
+
+			// check resultset
+
+			while (rs.next()) {
+				int dbID = rs.getInt("tour_id");
+				String dbName = rs.getString("tour_name");
+				String dbBriefDescription = rs.getString("brief_description");
+				String dbFullDescription = rs.getString("detail_description");
+				int dbPrice = rs.getInt("price");
+				int dbAvailableSlots = rs.getInt("available_slots");
+				int dbCategoryID = rs.getInt("tour_category_id");
+				String dbImage = rs.getString("image_location");
+				tours.add(new Tour(dbID, dbName, dbBriefDescription, dbFullDescription, dbPrice, dbAvailableSlots,
+						dbCategoryID, dbImage));
+			}
+
+			conn.close();
+
+		} catch (Exception e) {
+			System.out.println("Error :" + e);
+		}
+
+		return tours;
+	}
 }

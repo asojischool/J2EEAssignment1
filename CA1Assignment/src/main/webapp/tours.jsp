@@ -13,6 +13,17 @@
 	crossorigin="anonymous" />
 </head>
 <body>
+	<%@page import="models.User"%>
+	<%@page import="models.Tour"%>
+	<%@page import="java.util.ArrayList"%>
+
+	<%
+	ArrayList<Tour> tours = (ArrayList<Tour>) session.getAttribute("sessTours");
+	int categoryID = (Integer) session.getAttribute("sessCategoryID");
+	Boolean authorized = (Boolean) session.getAttribute("authorized");
+	User user = (User) session.getAttribute("sessUser");
+	%>
+
 	<main>
 		<section class="py-5 text-center container">
 			<div class="row py-lg-5">
@@ -28,15 +39,58 @@
 			</div>
 		</section>
 
+		<%
+		for (Tour tour : tours) {
+			String name = tour.getTour_name();
+			int id = tour.getTour_id();
+			int price = tour.getPrice();
+			int slots = tour.getAvailableSlots();
+			/* int categoryID = tour.getCategoryID(); */
+			String briefDescription = tour.getBreifDescription();
+			
+		%>
 		<div class="container">
-			<div class="row">
+			<div class="row mt-3 mb-3">
 				<div class="col-6">
 					<img class="card-img-top" alt="attraction"
 						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEjP5eJ4WIGuhEMAXpp2M11odo9HItPz3c3fAvPNzu_0nEXyeP">
 				</div>
-				<div class="col-6"></div>
+				<div class="col-6">
+					<h3><%=name %> Id:<%=id %></h3>
+					<p><%=price %></p>
+					<p><%=slots %></p>
+					<p><%=categoryID %></p>
+					<p>Know of any relatives or people who are Hainanese? Learn
+						more about how the early Hainanese came into Singapore and the
+						lives that they’ve led. Not forgetting the important Hainanese
+						contribution to the food culture in Singapore! Cook your own
+						scrumptious Hainanese dishes under the guidance of our chef!</p>
+				</div>
 			</div>
 		</div>
+		<%
+		}
+		%>
+
+		<!-- <div class="container">
+			<div class="row mt-3 mb-3">
+				<div class="col-6">
+					<img class="card-img-top" alt="attraction"
+						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEjP5eJ4WIGuhEMAXpp2M11odo9HItPz3c3fAvPNzu_0nEXyeP">
+				</div>
+				<div class="col-6">
+					<h3>Tour Name id</h3>
+					<p>price</p>
+					<p>slots</p>
+					<p>category id</p>
+					<p>Know of any relatives or people who are Hainanese? Learn
+						more about how the early Hainanese came into Singapore and the
+						lives that they’ve led. Not forgetting the important Hainanese
+						contribution to the food culture in Singapore! Cook your own
+						scrumptious Hainanese dishes under the guidance of our chef!</p>
+				</div>
+			</div>
+		</div> -->
 	</main>
 
 

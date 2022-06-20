@@ -17,7 +17,7 @@
 <body>
 	<%@page import="models.User"%>
 	<%@page import="models.Category"%>
-	<%@page import="java.util.ArrayList"%>%>
+	<%@page import="java.util.ArrayList"%>
 	<jsp:include page="/getCategory" />
 	<%
 	ArrayList<Category> categories = (ArrayList<Category>) session.getAttribute("sessCategories");
@@ -83,7 +83,7 @@
 								<p class="card-text"><%=description%></p>
 								<form></form>
 								<a class="btn btn-success btn-lg"
-									href="getTours?categoryID=<%=id%>>" role="button">Let's
+									href="getTours?categoryID=<%=id%>" role="button">Let's
 									Go</a>
 							</div>
 						</div>
