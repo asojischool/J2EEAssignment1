@@ -6,7 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import models.User;
+import models.UserService;
 
 /**
  * Servlet implementation class registerUser
@@ -30,12 +31,21 @@ public class registerUser extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		String username = request.getParameter("username")
+		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String role = request.getParameter("radio1");
 		String email = request.getParameter("email");
 		
 		UserService userService = new UserService();
+		int numRowsAffected = userService.registerUser(username, password, role, email);
+		
+		if(numRowsAffected > 0) {
+			response.sendRedirect("login.jsp");
+		}
+		else {
+			response.sendRedirect("register.jsp");
+		}
+		
 	}
 
 	/**

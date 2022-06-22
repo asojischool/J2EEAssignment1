@@ -50,7 +50,8 @@ public class UserService {
 		return loggedInUser;
 	}
 	
-	public User registerUser(String username, String password, String role, String email) {
+	public int registerUser(String username, String password, String role, String email) {
+		int numRowsAffected = 0;
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); 
 			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
@@ -62,12 +63,15 @@ public class UserService {
 			ps.setString(2, password);
 			ps.setString(3, role);
 			ps.setString(4, email);
-			int numRowsAffected = ps.executeUpdate();
-			
+			numRowsAffected = ps.executeUpdate();
+			if(numRowsAffected > 0) {
+				System.out.print("success");
+			}
 			conn.close();
 			
 			} catch (Exception e) {
 			System.err.println("Error :" + e);
 			}
+		return numRowsAffected;
 	}
 }
