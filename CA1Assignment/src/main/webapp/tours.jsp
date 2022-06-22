@@ -47,7 +47,6 @@
 			int slots = tour.getAvailableSlots();
 			/* int categoryID = tour.getCategoryID(); */
 			String briefDescription = tour.getBreifDescription();
-			
 		%>
 		<div class="container">
 			<div class="row mt-3 mb-3">
@@ -56,41 +55,25 @@
 						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEjP5eJ4WIGuhEMAXpp2M11odo9HItPz3c3fAvPNzu_0nEXyeP">
 				</div>
 				<div class="col-6">
-					<h3><%=name %> Id:<%=id %></h3>
-					<p><%=price %></p>
-					<p><%=slots %></p>
-					<p><%=categoryID %></p>
+					<h3><%=name%>
+						Id:<%=id%></h3>
+					<p><%=price%></p>
+					<p><%=slots%></p>
+					<p><%=categoryID%></p>
 					<p>Know of any relatives or people who are Hainanese? Learn
 						more about how the early Hainanese came into Singapore and the
 						lives that they’ve led. Not forgetting the important Hainanese
 						contribution to the food culture in Singapore! Cook your own
 						scrumptious Hainanese dishes under the guidance of our chef!</p>
+					<a class="btn btn-success btn-lg" href="getDetailedTour?tourID=<%=id%>"
+						role="button">Read More</a>
 				</div>
+
 			</div>
 		</div>
 		<%
 		}
 		%>
-
-		<!-- <div class="container">
-			<div class="row mt-3 mb-3">
-				<div class="col-6">
-					<img class="card-img-top" alt="attraction"
-						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEjP5eJ4WIGuhEMAXpp2M11odo9HItPz3c3fAvPNzu_0nEXyeP">
-				</div>
-				<div class="col-6">
-					<h3>Tour Name id</h3>
-					<p>price</p>
-					<p>slots</p>
-					<p>category id</p>
-					<p>Know of any relatives or people who are Hainanese? Learn
-						more about how the early Hainanese came into Singapore and the
-						lives that they’ve led. Not forgetting the important Hainanese
-						contribution to the food culture in Singapore! Cook your own
-						scrumptious Hainanese dishes under the guidance of our chef!</p>
-				</div>
-			</div>
-		</div> -->
 	</main>
 
 

@@ -17,12 +17,15 @@
 <body>
 	<%@page import="models.User"%>
 	<%@page import="models.Category"%>
+	<%@page import="models.CategoryService"%>
 	<%@page import="java.util.ArrayList"%>
-	<jsp:include page="/getCategory" />
+
 	<%
-	ArrayList<Category> categories = (ArrayList<Category>) session.getAttribute("sessCategories");
-	Boolean authorized = (Boolean) session.getAttribute("authorized");
 	User user = (User) session.getAttribute("sessUser");
+	Boolean authorized = (Boolean) session.getAttribute("authorized");
+
+	CategoryService categoryService = new CategoryService();
+	ArrayList<Category> categories = categoryService.getCategories();
 	%>
 
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
@@ -44,6 +47,19 @@
 					</li>
 				</ul>
 			</div>
+
+			<%
+			if (session.getAttribute("sessUser") != null) {
+			%>
+			<div class="navbar-text">
+				<p>Logged-In</p>
+			</div>
+			<a href="logout" class="btn btn-danger me-2" type="button">Logout</a>
+			<%
+			}
+			%>
+
+
 		</div>
 	</nav>
 
@@ -83,8 +99,7 @@
 								<p class="card-text"><%=description%></p>
 								<form></form>
 								<a class="btn btn-success btn-lg"
-									href="getTours?categoryID=<%=id%>" role="button">Let's
-									Go</a>
+									href="getTours?categoryID=<%=id%>" role="button">Let's Go</a>
 							</div>
 						</div>
 					</div>

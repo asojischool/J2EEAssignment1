@@ -17,39 +17,51 @@ import models.UserService;
 @WebServlet("/verifyUser")
 public class verifyUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public verifyUser() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
-	    String password = request.getParameter("password");
-	 
-	    UserService userService = new UserService();
-	    User user = userService.verifyUser(username, password);
-	    
-	    if(user == null) {
-	    	
-	    } else {
-	    	HttpSession session = request.getSession();
-	    	session.setAttribute("sessUser", user);
-	    	session.setAttribute("authorized", true);
-	    	response.sendRedirect("home.jsp");
-	    }
+	public verifyUser() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+
+		// validate input
+
+		// authenticate
+
+		UserService userService = new UserService();
+		User user = userService.verifyUser(username, password);
+
+		if (user == null) {
+			session.setAttribute("tempUsername", username);
+			session.setAttribute("tempPassword", password);
+			response.sendRedirect("login.jsp?errCode=invalidLogin");
+		} else {
+			session.setAttribute("sessUser", user);
+			session.setAttribute("authorized", true);
+			response.sendRedirect("home.jsp");
+		}
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

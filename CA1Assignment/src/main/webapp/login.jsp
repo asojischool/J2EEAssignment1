@@ -5,8 +5,15 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>login.jsp</title>
-
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<style>
+.displayNone {
+	display: none;
+}
+.height {
+	height: 100vh;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -16,24 +23,28 @@
 </head>
 <body>
 
-	<%!boolean useJS = false;%>
+	<%!boolean useJS = true;%>
 
 	<%
+	if (session.getAttribute("authorized") != null) {
+		Boolean sessAuthenticated = (Boolean) session.getAttribute("authorized");
+		System.out.println(sessAuthenticated);
+		if (sessAuthenticated == true) {
+			response.sendRedirect("home.jsp");
+		}
+	}
+	
 	if (useJS) {
 	%>
 	<script>
 		$(document).ready(function() {
 			const queryParams = new URLSearchParams(window.location.search);
 			const errCode = queryParams.get("errCode");
-
+			
 			if (errCode && errCode == "invalidLogin") {
-				$("#message").css({
-					'display' : 'block'
-				}).html("You have entered an invalid ID/Password");
+				$("#message").css({'display':'block'}).html("You have entered an invalid ID/Password");
 			} else {
-				$("message").css({
-					'display' : 'none'
-				});
+				$("#message").css({'display':'none'});
 			}
 		});
 	</script>
@@ -45,9 +56,6 @@
 	}
 	%>
 
-	<!-- Error Message -->
-	<h1 id="message" class="textRed"></h1>
-
 	<!-- Input Field -->
 	<div class="container">
 		<div
@@ -55,6 +63,7 @@
 			<div class="col-md-5">
 				<div class="box shadow bg-white p-4">
 					<h1 class="text-center mb-4">Login Form</h1>
+					<div id="message" class="alert alert-danger" role="alert"></div>
 					<form action="verifyUser" method="post">
 						<div class="form-floating mb-4">
 							<input class="form-control rounded-0" type="text" name="username"
@@ -71,6 +80,7 @@
 								name="btnSubmit" value="Login">
 						</div>
 					</form>
+
 				</div>
 			</div>
 		</div>

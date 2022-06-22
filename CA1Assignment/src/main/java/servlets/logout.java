@@ -7,39 +7,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-
-import models.Category;
-import models.CategoryService;
 
 /**
- * Servlet implementation class getCategory
+ * Servlet implementation class logout
  */
-@WebServlet("/getCategory")
-public class getCategory extends HttpServlet {
+@WebServlet("/logout")
+public class logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public getCategory() {
+	public logout() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		//useless
-		CategoryService categoryService = new CategoryService();
-		ArrayList<Category> categories = categoryService.getCategories();
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		session.setAttribute("sessCategories", categories);
+		 session.invalidate();
+		 response.sendRedirect("home.jsp");
 	}
 
 	/**
