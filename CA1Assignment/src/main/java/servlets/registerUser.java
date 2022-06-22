@@ -6,7 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import models.User;
+import models.UserService;
 
 /**
  * Servlet implementation class registerUser
@@ -31,30 +32,20 @@ public class registerUser extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		String username = request.getParameter("username");
-		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String role = request.getParameter("radio1");
+		String email = request.getParameter("email");
 		
-		try {
-			Class.forName("com.mysql.jdbc.Driver"); 
-			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
-			Connection conn = DriverManager.getConnection(connURL);
-			Statement stmt = conn.createStatement();
-			String sqlStr = "INSERT INTO User(username, email, password, role) VALUES (?, ?, ?, ?)";
-			PreparedStatement ps = conn.prepareStatement(sqlStr);
-			ps.setString(1, username);
-			ps.setString(2, email);
-			ps.setString(3, password);
-			ps.setString(4, role);
-			int numRowsAffected = ps.executeUpdate();
-			if(numRowsAffected > 1) {
-				request.sendRedirect("/CA1Assignment/home.jsp");
-			}
-			conn.close();
-			
-			} catch (Exception e) {
-			System.err.println("Error :" + e);
-			}
+		UserService userService = new UserService();
+		int numRowsAffected = userService.registerUser(username, password, role, email);
+		
+		if(numRowsAffected > 0) {
+			response.sendRedirect("login.jsp");
+		}
+		else {
+			response.sendRedirect("register.jsp");
+		}
+		
 	}
 
 	/**

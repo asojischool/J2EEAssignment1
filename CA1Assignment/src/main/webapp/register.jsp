@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Register</h1>
-    <form action="/CA1Assignment/registerUser" method="post">
+    <form action="registerUser" method="post">
 	
 		Username: <input name="username" type='text'> <br>
         Email: <input name="email" type='text'> <br>
@@ -16,7 +16,7 @@
 		<input type="radio" name="radio1" value="Public User">Public User
 		<input type="radio" name="radio1" value="Business Owner">Business Owner<br>
 		
-	<input type="submit" value="Login" name="btnSubmit">
+	<input type="submit" value="Register" name="btnSubmit">
 	</form>
 </body>
 </html> 
