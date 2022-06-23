@@ -15,7 +15,37 @@
 	<link rel="stylesheet" href="css/login.css">
 </head>
 <body>
+
+	<%!boolean useJS = false;%>
+
+	<%
+	if (useJS) {
+	%>
+	<script>
+		$(document).ready(function() {
+			const queryParams = new URLSearchParams(window.location.search);
+			const errCode = queryParams.get("errCode");
+
+			if (errCode && errCode == "invalidRegister") {
+				$("#message").css({
+					'display' : 'block'
+				}).html("Username/email is already taken.");
+			} else {
+				$("message").css({
+					'display' : 'none'
+				});
+			}
+		});
+	</script>
+	<%
+	} else {
+	%>
+
+	<%
+	}
+	%>
    
+	<h1 id="message" class="textRed"></h1>
 	
 	<div class="container">
 		<div
@@ -54,18 +84,5 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		$(document).ready(function(){
-			const queryParams = new URLSearchParams(window.location.href);
-			const errCode = queryParams.get("errCode");
-				
-			if (errCode && errCode == "invalidRegister") {
-				$("#message").css({'display'}:'block'}).html("Username/email is already taken.");
-			}
-			else {
-				$("message").css({'display':'none'});
-			}
-			});
-	</script>
 </body>
 </html> 
