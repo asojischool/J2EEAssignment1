@@ -55,17 +55,17 @@
 		</div>
 	</div>
 	<script>
-			$(document).ready(function(){
-				const queryParams = new URLSearchParams(window.location.href);
-				const errCode = queryParams.get("errCode");
+		$(document).ready(function(){
+			const queryParams = new URLSearchParams(window.location.href);
+			const errCode = queryParams.get("errCode");
 				
-				if (errCode && errCode == "invalidDetails") {
-					$("#message").css({'display'}:'block'}).html("Username/email is already taken.");
-				}
-				else {
+			if (errCode && errCode == "invalidRegister") {
+				$("#message").css({'display'}:'block'}).html("Username/email is already taken.");
+			}
+			else {
 				$("message").css({'display':'none'});
-				}
+			}
 			});
-		</script>
+	</script>
 </body>
 </html> 
