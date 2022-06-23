@@ -43,7 +43,7 @@ public class registerUser extends HttpServlet {
 			response.sendRedirect("login.jsp");
 		}
 		else {
-			response.sendRedirect("register.jsp");
+			response.sendRedirect("register.jsp?errCode=invalidRegister");
 		}
 		
 	}
