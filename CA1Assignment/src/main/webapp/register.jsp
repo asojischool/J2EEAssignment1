@@ -23,7 +23,7 @@
 			<div class="col-md-5">
 				<div class="box shadow bg-white p-4">
 					<h1 class="text-center mb-4">Register</h1>
-					<form action="verifyUser" method="post">
+					<form action="registerUser" method="post">
 						<div class="form-floating mb-4">
 							<input class="form-control rounded-0" type="text" name="username"
 								placeholder="username" id="floatingUsername"> <label
