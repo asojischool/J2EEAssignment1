@@ -26,9 +26,9 @@
 	<%!boolean useJS = true;%>
 
 	<%
-	if (session.getAttribute("authorized") != null) {
+	if (session.getAttribute("sessUser") != null && (Boolean) session.getAttribute("authorized") == true) {
 		Boolean sessAuthenticated = (Boolean) session.getAttribute("authorized");
-		System.out.println(sessAuthenticated);
+		System.out.println((Boolean)session.getAttribute("authorized"));
 		if (sessAuthenticated == true) {
 			response.sendRedirect("home.jsp");
 		}

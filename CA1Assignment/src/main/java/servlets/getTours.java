@@ -33,11 +33,13 @@ public class getTours extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int categoryID = Integer.parseInt(request.getParameter("categoryID"));
-		TourService tourService = new TourService();
-		ArrayList<Tour> tours = tourService.getToursByCategory(categoryID);
+		/*
+		 * TourService tourService = new TourService(); ArrayList<Tour> tours =
+		 * tourService.getToursByCategory(categoryID);
+		 */
 
 		HttpSession session = request.getSession();
-		session.setAttribute("sessTours", tours);
+		/* session.setAttribute("sessTours", tours); */
 		session.setAttribute("sessCategoryID", categoryID);
 		response.sendRedirect("tours.jsp");
 	}

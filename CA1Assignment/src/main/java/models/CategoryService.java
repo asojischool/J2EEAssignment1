@@ -41,4 +41,37 @@ public class CategoryService {
 
 		return categories;
 	}
+	
+	public Category getDetailedCategory(int categoryID) {
+
+		Category detailedCategory = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
+			Connection conn = DriverManager.getConnection(connURL);
+			
+			String sqlStr = "SELECT * FROM category WHERE category_id=?";
+			PreparedStatement ps = conn.prepareStatement(sqlStr);
+			ps.setInt(1, categoryID);
+			ResultSet rs = ps.executeQuery();
+
+			// check resultset
+			
+			if (rs.next()) {
+				int dbCategoryID = rs.getInt("category_id");
+				String dbCategoryName = rs.getString("category_name");
+				String dbCategoryDescription = rs.getString("category_description");
+				String dbCategoryImage = rs.getString("category_image");
+				detailedCategory = new Category(dbCategoryID, dbCategoryName, dbCategoryDescription, dbCategoryImage);
+			}
+
+			conn.close();
+
+		} catch (Exception e) {
+			System.out.println("Error :" + e);
+		}
+
+		return detailedCategory;
+	}
 }

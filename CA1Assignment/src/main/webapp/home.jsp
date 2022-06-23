@@ -3,7 +3,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+.banner-image {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+		url(image/singapore.png);
+	background-size: cover;
+	background-position: center;
+}
 
+body {
+	padding-top: 72px;
+}
+</style>
 <meta charset="ISO-8859-1">
 <title>Home.jsp</title>
 <link
@@ -28,55 +39,25 @@
 	ArrayList<Category> categories = categoryService.getCategories();
 	%>
 
-	<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Tours</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarNav"
-				aria-controls="navbarNav" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Features</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="#">Pricing</a>
-					</li>
-				</ul>
-			</div>
-
-			<%
-			if (session.getAttribute("sessUser") != null) {
-			%>
-			<div class="navbar-text">
-				<p>Logged-In</p>
-			</div>
-			<a href="logout" class="btn btn-danger me-2" type="button">Logout</a>
-			<%
-			}
-			%>
-
-
-		</div>
-	</nav>
+	<%@include file="navbar.jsp"%>
 
 	<main>
-		<section class="py-5 text-center container">
-			<div class="row py-lg-5">
-				<div class="col-lg-6 col-md-8 mx-auto">
-					<h1 class="fw-light">Singapore Tours</h1>
-					<p class="lead text-muted">Ready to experience the real
-						Singapore? Let's Go Tour Singapore is an award-winning tour
-						operator offering a wide range of unique tours. We got Bike Tours,
-						Food Tours, Boat Tours, Walking tours, Nature Tours, Theatrical
-						Tours and more. Make the most of each travel moment and create
-						some wonderful memories with us now!</p>
+		<div class="banner-image py-5">
+			<div class="text-center container">
+				<div class="row py-lg-5">
+					<div class="col-lg-6 col-md-8 mx-auto">
+						<h1 class="text-light fw-bolder">Singapore Tours</h1><br>
+						<p class="lead text-light fw-normal">Ready to experience the real
+							Singapore? Let's Go Tour Singapore is an award-winning tour
+							operator offering a wide range of unique tours. We got Bike
+							Tours, Food Tours, Boat Tours, Walking tours, Nature Tours,
+							Theatrical Tours and more. Make the most of each travel moment
+							and create some wonderful memories with us now!</p>
+					</div>
 				</div>
 			</div>
-		</section>
+		</div>
+
 
 		<div class="py-5 bg-light">
 			<div class="container">

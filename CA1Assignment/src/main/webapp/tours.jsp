@@ -15,26 +15,32 @@
 <body>
 	<%@page import="models.User"%>
 	<%@page import="models.Tour"%>
+	<%@page import="models.TourService"%>
+	<%@page import="models.Category"%>
+	<%@page import="models.CategoryService"%>
 	<%@page import="java.util.ArrayList"%>
 
 	<%
-	ArrayList<Tour> tours = (ArrayList<Tour>) session.getAttribute("sessTours");
 	int categoryID = (Integer) session.getAttribute("sessCategoryID");
+	TourService tourService = new TourService();
+	CategoryService categoryService = new CategoryService();
+	ArrayList<Tour> tours = tourService.getToursByCategory(categoryID);
+	Category detailedCategory = categoryService.getDetailedCategory(categoryID);
+
 	Boolean authorized = (Boolean) session.getAttribute("authorized");
 	User user = (User) session.getAttribute("sessUser");
 	%>
 
 	<main>
+		<%@include file="navbar.jsp"%>
+
 		<section class="py-5 text-center container">
 			<div class="row py-lg-5">
 				<div class="col-lg-6 col-md-8 mx-auto">
-					<h1 class="fw-light">Singapore Tours</h1>
-					<p class="lead text-muted">Ready to experience the real
-						Singapore? Let's Go Tour Singapore is an award-winning tour
-						operator offering a wide range of unique tours. We got Bike Tours,
-						Food Tours, Boat Tours, Walking tours, Nature Tours, Theatrical
-						Tours and more. Make the most of each travel moment and create
-						some wonderful memories with us now!</p>
+					<h1 class="fw-bold"><%=detailedCategory.getCategoryName()%>
+						Tours
+					</h1><br>
+					<p class="lead text-muted fw-normal"><%=detailedCategory.getCategoryDescription()%></p>
 				</div>
 			</div>
 		</section>
@@ -46,7 +52,7 @@
 			int price = tour.getPrice();
 			int slots = tour.getAvailableSlots();
 			/* int categoryID = tour.getCategoryID(); */
-			String briefDescription = tour.getBreifDescription();
+			String briefDescription = tour.getBriefDescription();
 		%>
 		<div class="container">
 			<div class="row mt-3 mb-3">
@@ -55,18 +61,16 @@
 						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEjP5eJ4WIGuhEMAXpp2M11odo9HItPz3c3fAvPNzu_0nEXyeP">
 				</div>
 				<div class="col-6">
-					<h3><%=name%>
-						Id:<%=id%></h3>
-					<p><%=price%></p>
-					<p><%=slots%></p>
-					<p><%=categoryID%></p>
+					<h3><%=name%></h3><br>
+					<p>Price: <%=price%></p>
+					<p>Slots: <%=slots%></p>
 					<p>Know of any relatives or people who are Hainanese? Learn
 						more about how the early Hainanese came into Singapore and the
 						lives that they’ve led. Not forgetting the important Hainanese
 						contribution to the food culture in Singapore! Cook your own
 						scrumptious Hainanese dishes under the guidance of our chef!</p>
-					<a class="btn btn-success btn-lg" href="getDetailedTour?tourID=<%=id%>"
-						role="button">Read More</a>
+					<a class="btn btn-success btn-lg"
+						href="getDetailedTour?tourID=<%=id%>" role="button">Read More</a>
 				</div>
 
 			</div>
