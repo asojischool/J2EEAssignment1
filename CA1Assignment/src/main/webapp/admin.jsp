@@ -4,7 +4,14 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>admin.jsp</title>
+<style>
+	table, th, td {
+  		border:1px solid black;
+  		margin-right: auto;
+  		margin-left: auto;
+	}
+</style>
 </head>
 <body>
 
