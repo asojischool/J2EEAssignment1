@@ -16,7 +16,7 @@
 </head>
 <body>
 
-	<%!boolean useJS = false;%>
+	<%!boolean useJS = true;%>
 
 	<%
 	if (useJS) {
@@ -45,7 +45,7 @@
 	}
 	%>
    
-	<h1 id="message" class="textRed"></h1>
+	<h1 id="message" style="color:red;"></h1>
 	
 	<div class="container">
 		<div
