@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.AdminService;
+
 /**
  * Servlet implementation class adminUpdate
  */
@@ -28,6 +30,24 @@ public class adminUpdate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		String idStr = request.getParameter("id");
+		int id = Integer.parseInt(idStr);
+		String name = request.getParameter("name");
+		String briefDescription = request.getParameter("briefDescription");
+		String fullDescription = request.getParameter("fullDescription");
+		String priceStr = request.getParameter("price");
+		int price = Integer.parseInt(priceStr);
+		String slotsStr = request.getParameter("slots");
+		int slots = Integer.parseInt(slotsStr);
+		String catIDStr = request.getParameter("catID");
+		int catID = Integer.parseInt(catIDStr);
+		String image = request.getParameter("image");
+		
+		AdminService adminService = new AdminService();
+		int numRowsAffeted = adminService.adminUpdate(id, name, briefDescription, fullDescription, price, slots, catID, image);
+		
+		response.sendRedirect("home.jsp");
 	}
 
 	/**
