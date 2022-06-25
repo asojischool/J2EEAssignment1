@@ -4,7 +4,7 @@
 <html>
 <head>
 <style>
-	table, th, td {
+	table, tr, td {
   		border:1px solid black;
   		margin-right: auto;
   		margin-left: auto;
@@ -26,8 +26,8 @@
 	<%
 	AdminService adminService = new AdminService();
 	String tourStr = adminService.adminView();
+	out.println(tourStr);
 	%>
-	<div id="<%= tourStr%>"></div>
 	<div>
 		<form action="adminInsert.jsp">
 			<input type="submit" value="Add New Tour">

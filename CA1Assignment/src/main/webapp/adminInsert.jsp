@@ -6,7 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>adminInsert.jsp</title>
 <style>
-	table, th, td {
+	table, tr, td {
   		border:1px solid black;
   		margin-right: auto;
   		margin-left: auto;
