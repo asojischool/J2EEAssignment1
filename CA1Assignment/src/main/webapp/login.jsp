@@ -10,7 +10,7 @@
 	display: none;
 }
 .height {
-	height: 100vh;
+	height: 80vh;
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
@@ -55,6 +55,8 @@
 	<%
 	}
 	%>
+
+	<%@include file="navbar.jsp"%>
 
 	<!-- Input Field -->
 	<div class="container">
