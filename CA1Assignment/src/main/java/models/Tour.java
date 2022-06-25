@@ -3,19 +3,19 @@ package models;
 public class Tour {
 	private int tour_id;
 	private String tour_name;
-	private String breifDescription;
+	private String briefDescription;
 	private String fullDescription;
 	private int price;
 	private int availableSlots;
 	private int categoryID;
 	private String image;
 	
-	public Tour(int tour_id, String tour_name, String breifDescription, String fullDescription, int price,
+	public Tour(int tour_id, String tour_name, String briefDescription, String fullDescription, int price,
 			int availableSlots, int categoryID, String image) {
 		super();
 		this.tour_id = tour_id;
 		this.tour_name = tour_name;
-		this.breifDescription = breifDescription;
+		this.briefDescription = briefDescription;
 		this.fullDescription = fullDescription;
 		this.price = price;
 		this.availableSlots = availableSlots;
@@ -39,12 +39,12 @@ public class Tour {
 		this.tour_name = tour_name;
 	}
 
-	public String getBreifDescription() {
-		return breifDescription;
+	public String getBriefDescription() {
+		return briefDescription;
 	}
 
-	public void setBreifDescription(String breifDescription) {
-		this.breifDescription = breifDescription;
+	public void setBriefDescription(String briefDescription) {
+		this.briefDescription = briefDescription;
 	}
 
 	public String getFullDescription() {

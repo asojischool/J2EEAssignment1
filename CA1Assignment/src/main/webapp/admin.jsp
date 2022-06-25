@@ -24,5 +24,11 @@
 	
 	<%String tour = (String)session.getAttribute("tourStr"); %>
 	<div id="<%= tour%>"></div>
+	
+	<div>
+		<form action="adminInsert.jsp">
+			<input type="submit" value="Add New Tour">
+		</form>
+	</div>
 </body>
 </html>
