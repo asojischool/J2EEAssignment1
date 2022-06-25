@@ -37,4 +37,48 @@ public class AdminService {
 			}
 		return tourStr;
 	}
+	public int adminDelete(int id) {
+		int numRowsAffected = 0;
+		try {
+			Class.forName("com.mysql.jdbc.Driver"); 
+			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
+			Connection conn = DriverManager.getConnection(connURL);
+			Statement stmt = conn.createStatement();
+			String sqlStr = "DELETE FROM tour WHERE tour_id=?";
+			PreparedStatement ps = conn.prepareStatement(sqlStr);
+			ps.setInt(1, id);
+			numRowsAffected = ps.executeUpdate();
+			if(numRowsAffected > 0) {
+				System.out.print("success");
+			}
+			conn.close();	
+			} catch (Exception e) {
+			System.err.println("Error :" + e);
+			}
+		return numRowsAffected;
+	}
+	public int adminUpdate(int id, String name, String briefDescription, String fullDescription, int price, int slots, int catID, String image) {
+		int numRowsAffected = 0;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
+			Connection conn = DriverManager.getConnection(connURL);
+			Statement stmt = conn.createStatement();
+			String sqlStr = "Update tour SET tour_name=?, briefDescription=?, fullDescription=?, price=?, availableSlots=?, tour_category_id=?, image=? WHERE tour_id=?";
+			PreparedStatement ps = conn.prepareStatement(sqlStr);
+			ps.setString(1,name);
+			ps.setString(2,briefDescription);
+			ps.setString(3,fullDescription);
+			ps.setInt(4,price);
+			ps.setInt(5,slots);
+			ps.setInt(6,catID);
+			ps.setString(7,image);
+			ps.setInt(8,id);
+			numRowsAffected = ps.executeUpdate();
+			conn.close();
+			} catch (Exception e) {
+			System.err.println("Error :" + e);
+			}
+		return numRowsAffected;
+	}
 }

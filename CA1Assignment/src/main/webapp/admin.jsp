@@ -23,5 +23,6 @@
 	<%@page import="servlets.adminView" %>
 	
 	<%String tour = (String)session.getAttribute("tourStr"); %>
+	<div id="<%= tour%>"></div>
 </body>
 </html>

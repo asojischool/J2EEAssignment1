@@ -31,11 +31,11 @@
 		<form action="adminUpdate" method="post">
 			<tr>
 				<td>Tour ID: </td>
-				<td><input type="number" value="<%= id %>" readonly></td>
+				<td><input type="number" value="<%= id %>" name="id" readonly></td>
 			</tr>
 			<tr>
 				<td>Tour Name: </td>
-				<td><input type="text" value="<%= name %>"></td>
+				<td><input type="text" value="<%= name %>" name="name"></td>
 			</tr>
 			<tr>
 				<td>Brief Description</td>
@@ -67,7 +67,7 @@
 			<tr>
 				<td>
 					<form action="adminDelete" method="post">
-						<input type="hidden" name="<%= id%>">
+						<input type="hidden" name="id" value="<%= id%>">
 						<input type="submit" value="Delete" class="button">
 					</form>
 				</td>
