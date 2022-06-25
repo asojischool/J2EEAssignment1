@@ -45,7 +45,7 @@ public class adminInsert extends HttpServlet {
 		AdminService adminService = new AdminService();
 		int numRowsAffected = adminService.adminInsert(name, briefDescription, fullDescription, price, slots, catID, image);
 		
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("admin.jsp");
 	}
 
 	/**

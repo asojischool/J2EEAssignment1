@@ -19,12 +19,15 @@
 <title>admin.jsp</title>
 </head>
 <body>
-	<%@page import="models.Tour"%>
 	<%@page import="servlets.adminView" %>
+	<%@page import="models.AdminService" %>
 	
-	<%String tour = (String)session.getAttribute("tourStr"); %>
-	<div id="<%= tour%>"></div>
-	
+
+	<%
+	AdminService adminService = new AdminService();
+	String tourStr = adminService.adminView();
+	%>
+	<div id="<%= tourStr%>"></div>
 	<div>
 		<form action="adminInsert.jsp">
 			<input type="submit" value="Add New Tour">

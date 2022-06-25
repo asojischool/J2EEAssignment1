@@ -38,7 +38,7 @@ public class adminDelete extends HttpServlet {
 		AdminService adminService = new AdminService();
 		int numRowsAffected = adminService.adminDelete(id);
 		
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("admin.jsp");
 	}
 
 	/**
