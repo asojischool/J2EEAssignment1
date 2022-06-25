@@ -22,10 +22,10 @@
 <title>adminEdit.jsp</title>
 </head>
 <body>
-	<%//String id = request.getParameter("id"); %>
-	<%//String name = request.getParameter("name"); %>
-	<%int id = 1;
-		String name = "SG";%>
+	<%String id = request.getParameter("id"); %>
+	<%String name = request.getParameter("name"); %>
+	<%//int id = 1;
+		//String name = "SG";%>
 	
 	<table>
 		<form action="adminUpdate" method="post">
@@ -63,7 +63,9 @@
 			</tr>
 			<tr>
 				<td><input type="submit" value="Submit"></td>
+				
 			</tr>
+			</form>
 			<tr>
 				<td>
 					<form action="adminDelete" method="post">
@@ -71,7 +73,7 @@
 						<input type="submit" value="Delete" class="button">
 					</form>
 				</td>
-		</form>
+		
 	</table>
 </body>
 </html>
