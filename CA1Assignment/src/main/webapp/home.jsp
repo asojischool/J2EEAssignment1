@@ -22,7 +22,6 @@ body {
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous" />
-<link rel="stylesheet" href="css/login.css">
 
 </head>
 <body>

@@ -13,6 +13,9 @@
 	}
 	h2 {
 	}
+	body {
+		padding-top: 72px;
+	}
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link
@@ -26,15 +29,15 @@
 	<%@page import="models.User" %>
 	
 	<%
-		User user = (User)session.getAttribute("sessUser");
-		if(user == null) {
+	User user = (User) session.getAttribute("sessUser");
+	if (user == null) {
+		response.sendRedirect("home.jsp");
+	} else {
+		String userRole = user.getRole();
+		if (!(userRole.equals("admin"))) {
 			response.sendRedirect("home.jsp");
-		}else {
-			String userRole = user.getRole();
-			if(userRole != "admin") {
-				response.sendRedirect("home.jsp");
-			}
 		}
+	}
 	%>
 
 	<div>

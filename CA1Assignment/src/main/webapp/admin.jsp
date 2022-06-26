@@ -9,6 +9,9 @@ table, tr, td {
 	margin-right: auto;
 	margin-left: auto;
 }
+body {
+	padding-top: 72px;
+}
 </style>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -40,6 +43,8 @@ table, tr, td {
 	AdminService adminService = new AdminService();
 	String tourStr = adminService.adminView();
 	%>
+
+	<%@include file="navbarAdmin.jsp"%>
 
 	<div>
 		<h2 style="text-align: center;" class="text-info">Tour Info</h2>
