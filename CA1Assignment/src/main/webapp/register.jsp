@@ -44,7 +44,7 @@
 	<%
 	}
 	%>
-   
+    <%@include file="navbar.jsp"%>
 	<h1 id="message" style="color:red;"></h1>
 	
 	<div class="container">
