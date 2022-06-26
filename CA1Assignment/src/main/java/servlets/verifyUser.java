@@ -43,15 +43,20 @@ public class verifyUser extends HttpServlet {
 
 		UserService userService = new UserService();
 		User user = userService.verifyUser(username, password);
+		String userRole =user.getRole();
 
-		if (user == null) {
-			session.setAttribute("tempUsername", username);
-			session.setAttribute("tempPassword", password);
-			response.sendRedirect("login.jsp?errCode=invalidLogin");
-		} else {
+		if (userRole == "admin") {
+			session.setAttribute("sessUser", user);
+			session.setAttribute("authorized", true);
+			response.sendRedirect("admin.jsp");
+		} else if (userRole == "user") {
 			session.setAttribute("sessUser", user);
 			session.setAttribute("authorized", true);
 			response.sendRedirect("home.jsp");
+		} else {
+			session.setAttribute("tempUsername", username);
+			session.setAttribute("tempPassword", password);
+			response.sendRedirect("login.jsp?errCode=invalidLogin");
 		}
 
 	}
