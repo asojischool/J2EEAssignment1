@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <style>
-	table, tr, td {
-  		border:0px solid black;
-  		margin-right: auto;
-  		margin-left: auto;
-	}
+table, tr, td {
+	border: 0px solid black;
+	margin-right: auto;
+	margin-left: auto;
+}
 </style>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -19,38 +19,39 @@
 <title>admin.jsp</title>
 </head>
 <body>
-	<%@page import="servlets.adminView" %>
-	<%@page import="models.AdminService" %>
-	<%@page import="models.User" %>
-	
+	<%@page import="servlets.adminView"%>
+	<%@page import="models.AdminService"%>
+	<%@page import="models.User"%>
+
 	<%
-		User user = (User)session.getAttribute("sessUser");
-		if(user == null) {
+	User user = (User) session.getAttribute("sessUser");
+	if (user == null) {
+		response.sendRedirect("home.jsp");
+	} else {
+		String userRole = user.getRole();
+		if (!(userRole.equals("admin"))) {
 			response.sendRedirect("home.jsp");
-		}else {
-			String userRole = user.getRole();
-			if(userRole != "admin") {
-				response.sendRedirect("home.jsp");
-			}
 		}
+	}
 	%>
-	
+
 
 	<%
 	AdminService adminService = new AdminService();
 	String tourStr = adminService.adminView();
 	%>
-	
+
 	<div>
-		<h2 style="text-align:center;" class="text-info">Tour Info</h2>
+		<h2 style="text-align: center;" class="text-info">Tour Info</h2>
 	</div>
 
 	<div class="container">
 		<%
-			out.print(tourStr);
+		out.print(tourStr);
 		%>
 		<form action="adminInsert.jsp">
-			<input class="btn btn-primary fs-5" type="submit" value="Add New Tour">
+			<input class="btn btn-primary fs-5" type="submit"
+				value="Add New Tour">
 		</form>
 	</div>
 </body>
