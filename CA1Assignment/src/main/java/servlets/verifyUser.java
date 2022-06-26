@@ -38,20 +38,29 @@ public class verifyUser extends HttpServlet {
 		String password = request.getParameter("password");
 
 		// validate input
-
+		
+		
 		// authenticate
 
 		UserService userService = new UserService();
 		User user = userService.verifyUser(username, password);
+		String userRole = user.getRole();
+		System.out.println(userRole);
+		System.out.println(userRole.equals("member"));
+		System.out.println(userRole.equals("admin"));
 
-		if (user == null) {
-			session.setAttribute("tempUsername", username);
-			session.setAttribute("tempPassword", password);
-			response.sendRedirect("login.jsp?errCode=invalidLogin");
-		} else {
+		if (userRole.equals("admin")) {
+			session.setAttribute("sessUser", user);
+			session.setAttribute("authorized", true);
+			response.sendRedirect("admin.jsp");
+		} else if (userRole.equals("member")) {
 			session.setAttribute("sessUser", user);
 			session.setAttribute("authorized", true);
 			response.sendRedirect("home.jsp");
+		} else {
+			session.setAttribute("tempUsername", username);
+			session.setAttribute("tempPassword", password);
+			response.sendRedirect("login.jsp?errCode=invalidLogin");
 		}
 
 	}
