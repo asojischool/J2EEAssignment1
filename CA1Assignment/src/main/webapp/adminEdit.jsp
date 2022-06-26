@@ -5,7 +5,7 @@
 <head>
 <style>
 	table, th, td {
-  		border:1px solid black;
+  		border:0px solid black;
   		margin-right: auto;
   		margin-left: auto;
 	}
@@ -30,58 +30,66 @@
 <body>
 	<%String id = request.getParameter("id"); %>
 	<%String name = request.getParameter("name"); %>
-
 	
-	<table>
-		<form action="adminUpdate" method="post">
-			<tr>
-				<td>Tour ID: </td>
-				<td><input type="number" value="<%= id %>" name="id" readonly></td>
-			</tr>
-			<tr>
-				<td>Tour Name: </td>
-				<td><input type="text" value="<%= name %>" name="name"></td>
-			</tr>
-			<tr>
-				<td>Brief Description</td>
-				<td><input type="text" name="briefDescription"></td>
-			</tr>
-			<tr>
-				<td>Full Description</td>
-				<td><input type="text" name="fullDescription"></td>
-			</tr>
-			<tr>
-				<td>Price</td>
-				<td><input type="number" name="price"></td>
-			</tr>
-			<tr>
-				<td>Available Slots</td>
-				<td><input type="number" name="slots"></td>
-			</tr>
-			<tr>
-				<td>Category ID</td>
-				<td><input type="number" name="catID"></td>
-			</tr>
-			<tr>
-				<td>Image URL</td>
-				<td><input type="text" name="image"></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Submit"></td>
-				
-			</tr>
+	<div>
+		<h2 style="text-align:center;" class="text-info">Edit Tour</h2>
+	</div>
+
+	<div class="container">
+		<table class="row d-flex justify-content-center height height align-content-center">
+			<form action="adminUpdate" method="post">
+				<tr class="col-md-5">
+					<td class="box shadow bg-white p-4">Tour ID: </td>
+					<td class="box shadow bg-white p-4"><input type="number" value="<%= id %>" name="id" readonly></td>
+				</tr>
+				<tr class="col-md-5">
+					<td class="box shadow bg-white p-4">Tour Name: </td>
+					<td class="box shadow bg-white p-4"><input type="text" value="<%= name %>" name="name"></td>
+				</tr>
+				<tr class="col-md-5">
+					<td class="box shadow bg-white p-4">Brief Description</td>
+					<td class="box shadow bg-white p-4"><input type="text" name="briefDescription"></td>
+				</tr>
+				<tr class="col-md-5">
+					<td class="box shadow bg-white p-4">Full Description</td>
+					<td class="box shadow bg-white p-4"><input type="text" name="fullDescription"></td>
+				</tr>
+				<tr class="col-md-5">
+					<td class="box shadow bg-white p-4">Price</td>
+					<td class="box shadow bg-white p-4"><input type="number" name="price"></td>
+				</tr>
+				<tr class="col-md-5">
+					<td class="box shadow bg-white p-4">Available Slots</td>
+					<td class="box shadow bg-white p-4"><input type="number" name="slots"></td>
+				</tr>
+				<tr class="col-md-5">
+					<td class="box shadow bg-white p-4">Category ID</td>
+					<td class="box shadow bg-white p-4"><input type="number" name="catID"></td>
+				</tr>
+				<tr class="col-md-5">
+					<td class="box shadow bg-white p-4">Image URL</td>
+					<td class="box shadow bg-white p-4"><input type="text" name="image"></td>
+				</tr>
+				<tr class="col-md-5">
+					<td class="d-grid gap-2 mb-4"><input class="btn btn-success fs-5" type="submit" value="Submit"></td>
+				</tr>
 			</form>
-			<tr>
-				<td>
-					<form action="adminDelete" method="post">
-						<input type="hidden" name="id" value="<%= id%>">
-						<input type="submit" value="Delete" class="button">
-					</form>
-				</td>
-		
-	</table>
-	<form action="admin.jsp">
-		<input type="submit" value="Back">
-	</form>
+				<tr class="col-md-5">
+					<td class="d-grid gap-2 mb-4">
+						<form action="adminDelete" method="post">
+							<input type="hidden" name="id" value="<%= id%>">
+							<input class="btn btn-danger fs-5" type="submit" value="Delete" class="button">
+						</form>
+					</td>	
+				</tr>
+				<tr class="col-md-5">
+					<td class="d-grid gap-2 mb-4">
+						<form action="admin.jsp">
+							<input class="btn btn-primary fs-5" type="submit" value="Back">
+						</form>
+					</td>
+				</tr>
+		</table>
+	</div>
 </body>
 </html>
