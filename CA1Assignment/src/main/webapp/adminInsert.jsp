@@ -73,7 +73,7 @@
 				</tr>
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Image URL</td>
-					<td class="box shadow bg-white p-4"><input type="text" name="image"></td>
+					<td class="box shadow bg-white p-4"><input type="text" name="image" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEjP5eJ4WIGuhEMAXpp2M11odo9HItPz3c3fAvPNzu_0nEXyeP"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="d-grid gap-2 mb-4"><input class="btn btn-success fs-5" type="submit" value="Submit"></td>
