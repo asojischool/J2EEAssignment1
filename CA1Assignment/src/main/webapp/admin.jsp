@@ -25,9 +25,13 @@
 	
 	<%
 		User user = (User)session.getAttribute("sessUser");
-		String userRole = user.getRole();
-		if(userRole != "admin") {
+		if(user == null) {
 			response.sendRedirect("home.jsp");
+		}else {
+			String userRole = user.getRole();
+			if(userRole != "admin") {
+				response.sendRedirect("home.jsp");
+			}
 		}
 	%>
 	
