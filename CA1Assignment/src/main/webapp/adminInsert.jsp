@@ -59,6 +59,7 @@
 				</tr>
 				<tr class="col-md-5">
 					<td class="d-grid gap-2 mb-4"><input class="btn btn-success fs-5" type="submit" value="Submit"></td>
+			</form>
 				</tr>
 				<tr class="col-md-5">
 					<td class="d-grid gap-2 mb-4">
@@ -67,7 +68,6 @@
 						</form>
 					</td>
 				</tr>
-			</form>
 		</table>
 	</div>
 </body>

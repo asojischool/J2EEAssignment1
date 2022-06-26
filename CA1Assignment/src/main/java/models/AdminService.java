@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class AdminService {
 	public String adminView() {
 		ArrayList<Tour> tours = new ArrayList<Tour>();
-		String tourStr = "<table><tr><td>Tour ID</td><td>Tour Name</td><td>Edit</td>";
+		String tourStr = "<table class=\"row d-flex justify-content-center height height align-content-center\"><tr><td class=\"box shadow bg-white p-4\">Tour ID</td><td class=\"box shadow bg-white p-4\">Tour Name</td><td class=\"box shadow bg-white p-4\">Edit</td>";
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); 
 			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
@@ -26,8 +26,8 @@ public class AdminService {
 				String dbImage = rs.getString("image_location");
 				tours.add(new Tour(dbID, dbName, dbBriefDescription, dbFullDescription, dbPrice, dbAvailableSlots,
 						dbCategoryID, dbImage));
-				tourStr += "<tr><td>" + dbID + "</td><td>" + dbName +
-						"</td><td><form action=\"adminEdit.jsp?id=" + 
+				tourStr += "<tr><td class=\"box shadow bg-white p-4\">" + dbID + "</td><td class=\"box shadow bg-white p-4\">" + dbName +
+						"</td><td class=\"box shadow bg-white p-4\"><form action=\"adminEdit.jsp?id=" + 
 						dbID + "&name=" + dbName + "\" method=\"post\"><input type=\"submit\" value=\"edit\"></form></td></tr>";
 			}
 			tourStr += "</table>";
