@@ -55,5 +55,8 @@
 			</tr>
 		</form>
 	</table>
+	<form action="admin.jsp">
+		<input type="submit" value="Back">
+	</form>
 </body>
 </html>
