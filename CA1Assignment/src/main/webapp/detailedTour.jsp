@@ -84,11 +84,6 @@ img {
 				<p class=""><%=detailedTour.getFullDescription()%></p>
 			</div>
 		</div>
-		
-		<div class="container mt-5">
-			<h1 class="">Reviews</h1>
-			<
-		</div>
 
 	</main>
 
