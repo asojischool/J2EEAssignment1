@@ -53,12 +53,13 @@
 			int slots = tour.getAvailableSlots();
 			/* int categoryID = tour.getCategoryID(); */
 			String briefDescription = tour.getBriefDescription();
+			String image = tour.getImage();
 		%>
 		<div class="container">
 			<div class="row mt-3 mb-3">
 				<div class="col-6">
 					<img class="card-img-top" alt="attraction"
-						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEjP5eJ4WIGuhEMAXpp2M11odo9HItPz3c3fAvPNzu_0nEXyeP">
+						src="<%=image%>">
 				</div>
 				<div class="col-6">
 					<h3><%=name%></h3><br>

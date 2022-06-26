@@ -56,7 +56,7 @@ img {
 	<main>
 		<div class="w-100 banner-image-container">
 			<img class="w-100 h-100" alt="Tour"
-				src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEjP5eJ4WIGuhEMAXpp2M11odo9HItPz3c3fAvPNzu_0nEXyeP">
+				src="<%=detailedTour.getImage()%>">
 		</div>
 
 		<div class="container mt-5">
