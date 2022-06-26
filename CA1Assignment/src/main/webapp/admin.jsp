@@ -26,9 +26,12 @@
 	<%
 	AdminService adminService = new AdminService();
 	String tourStr = adminService.adminView();
-	out.println(tourStr);
 	%>
-	<div>
+
+	<div class="container">
+		<%
+			out.print(tourStr);
+		%>
 		<form action="adminInsert.jsp">
 			<input type="submit" value="Add New Tour">
 		</form>
