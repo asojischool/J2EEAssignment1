@@ -21,6 +21,15 @@
 <body>
 	<%@page import="servlets.adminView" %>
 	<%@page import="models.AdminService" %>
+	<%@page import="models.User" %>
+	
+	<%
+		User user = (User)session.getAttribute("sessUser");
+		String userRole = user.getRole();
+		if(userRole != "admin") {
+			response.sendRedirect("home.jsp");
+		}
+	%>
 	
 
 	<%

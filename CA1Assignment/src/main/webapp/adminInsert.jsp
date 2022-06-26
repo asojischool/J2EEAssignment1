@@ -22,6 +22,17 @@
 	crossorigin="anonymous" />
 </head>
 <body>
+
+	<%@page import="models.User" %>
+	
+	<%
+		User user = (User)session.getAttribute("sessUser");
+		String userRole = user.getRole();
+		if(userRole != "admin") {
+			response.sendRedirect("home.jsp");
+		}
+	%>
+
 	<div>
 		<h2 style="text-align:center;" class="text-info">Add Tour</h2>
 	</div>

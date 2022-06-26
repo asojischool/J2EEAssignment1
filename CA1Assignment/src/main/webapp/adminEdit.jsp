@@ -28,6 +28,17 @@
 <title>adminEdit.jsp</title>
 </head>
 <body>
+
+	<%@page import="models.User" %>
+	
+	<%
+		User user = (User)session.getAttribute("sessUser");
+		String userRole = user.getRole();
+		if(userRole != "admin") {
+			response.sendRedirect("home.jsp");
+		}
+	%>
+
 	<%String id = request.getParameter("id"); %>
 	<%String name = request.getParameter("name"); %>
 	
