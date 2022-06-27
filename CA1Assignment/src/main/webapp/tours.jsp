@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>tours.jsp</title>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -21,6 +21,9 @@
 	<%@page import="java.util.ArrayList"%>
 
 	<%
+	if (session.getAttribute("sessCategoryID") == null){
+		response.sendRedirect("home.jsp");
+	}
 	int categoryID = (Integer) session.getAttribute("sessCategoryID");
 	TourService tourService = new TourService();
 	CategoryService categoryService = new CategoryService();

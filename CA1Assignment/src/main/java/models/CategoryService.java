@@ -74,4 +74,31 @@ public class CategoryService {
 
 		return detailedCategory;
 	}
+	
+	public String getCategoryName(int categoryID) {
+		String dbCategoryName = "";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
+			Connection conn = DriverManager.getConnection(connURL);
+			
+			String sqlStr = "SELECT category_name FROM category WHERE category_id=?";
+			PreparedStatement ps = conn.prepareStatement(sqlStr);
+			ps.setInt(1, categoryID);
+			ResultSet rs = ps.executeQuery();
+
+			// check resultset
+			
+			if (rs.next()) {
+				dbCategoryName = rs.getString("category_name");
+			}
+
+			conn.close();
+
+		} catch (Exception e) {
+			System.out.println("Error :" + e);
+		}
+
+		return dbCategoryName;
+	}
 }

@@ -30,7 +30,7 @@ img {
 }
 </style>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>detailedTour.jsp</title>
 <script src="https://kit.fontawesome.com/996f70c9aa.js"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet"
@@ -44,11 +44,21 @@ img {
 <body>
 	<%@page import="models.User"%>
 	<%@page import="models.Tour"%>
+	<%@page import="models.Category"%>
+	<%@page import="models.CategoryService"%>
 	<%@page import="java.util.ArrayList"%>
+	<%!Tour detailedTour = null;%>
+	<%!CategoryService categoryService = null;%>
+	<%!int tourID = 0;%>
 
 	<%
-	Tour detailedTour = (Tour) session.getAttribute("sessDetailedTour");
-	int tourID = (Integer) session.getAttribute("sessTourID");
+	if (session.getAttribute("sessDetailedTour") == null) {
+		response.sendRedirect("home.jsp");
+	} else {
+		detailedTour = (Tour) session.getAttribute("sessDetailedTour");
+		tourID = (Integer) session.getAttribute("sessTourID");
+		categoryService = new CategoryService();
+	}
 	%>
 
 	<%@include file="navbar.jsp"%>
@@ -67,15 +77,15 @@ img {
 				<div class="">
 					<div class="fs-6">
 						<i class="bi bi-tags fa-3x align-middle text-danger"></i>
-						<p class="align-middle d-inline fw-bold iconText">Category</p>
+						<p class="align-middle d-inline fw-bold iconText">Category: <%=categoryService.getCategoryName(detailedTour.getCategoryID())%></p>
 					</div>
 					<div class="fs-6">
 						<i class="bi bi-person fa-3x align-middle mr-2 text-danger"></i>
-						<p class="align-middle d-inline fw-bold iconText">Slots</p>
+						<p class="align-middle d-inline fw-bold iconText">Slots: <%=detailedTour.getAvailableSlots() %></p>
 					</div>
 					<div class="fs-6">
 						<i class="bi bi-currency-dollar fa-3x align-middle text-danger"></i>
-						<p class="align-middle d-inline fw-bold iconText">Cost: $100</p>
+						<p class="align-middle d-inline fw-bold iconText">Cost: <%=detailedTour.getPrice() %></p>
 					</div>
 					<br>
 				</div>
