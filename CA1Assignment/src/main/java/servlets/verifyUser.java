@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,33 +40,46 @@ public class verifyUser extends HttpServlet {
 		String password = request.getParameter("password");
 
 		// validate input
-
+		if (username == null || username.equals("") || password == null || password.equals("")) {
+			request.setAttribute("err", "Please enter your ID/Password");
+			request.setAttribute("tempUsername", username);
+			request.setAttribute("tempPassword", password);
+			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+			rd.forward(request, response);
+			return;
+		}
+		
 		// authenticate
-
 		UserService userService = new UserService();
 		User user = userService.verifyUser(username, password);
 		
 		if (user == null) {
-			System.out.println("here");
-			session.setAttribute("tempUsername", username);
-			session.setAttribute("tempPassword", password);
-			response.sendRedirect("login.jsp?errCode=invalidLogin");
+			System.out.println("invalid " + username + ", " + password);
+			
+			request.setAttribute("err", "You have entered an Invalid ID/Password");
+			request.setAttribute("tempUsername", username);
+			request.setAttribute("tempPassword", password);
+			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+			rd.forward(request, response);
+			return;
+			
+//			session.setAttribute("tempUsername", username);
+//			session.setAttribute("tempPassword", password);
+//			response.sendRedirect("login.jsp?errCode=invalidLogin");
 		}
+		
 		if (user != null) {
-		String userRole = user.getRole();
-		
-		System.out.println(userRole.equals("member"));
-		System.out.println(userRole.equals("admin"));
-		
-		if (userRole.equals("admin")) {
-			session.setAttribute("sessUser", user);
-			session.setAttribute("authorized", true);
-			response.sendRedirect("admin.jsp");
-		} else if (userRole.equals("member")) {
-			session.setAttribute("sessUser", user);
-			session.setAttribute("authorized", true);
-			response.sendRedirect("home.jsp");
-		}
+			String userRole = user.getRole();
+			
+			if (userRole.equals("admin")) {
+				session.setAttribute("sessUser", user);
+				session.setAttribute("authorized", true);
+				response.sendRedirect("admin.jsp");
+			} else if (userRole.equals("member")) {
+				session.setAttribute("sessUser", user);
+				session.setAttribute("authorized", true);
+				response.sendRedirect("home.jsp");
+			}
 		}
 
 	}
