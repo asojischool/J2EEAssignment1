@@ -5,19 +5,20 @@ import java.sql.*;
 public class UserService {
 	public User verifyUser(String username, String password) {
 		
-		User loggedInUser = null;
+		User user = null;
+		Connection conn = null;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
-			Connection conn = DriverManager.getConnection(connURL);
+			conn = DriverManager.getConnection(connURL);
 	
 	        String sqlStr = "SELECT * FROM user WHERE username=? AND password=?";
 	        PreparedStatement ps = conn.prepareStatement(sqlStr);
 	        ps.setString(1, username);
 	        ps.setString(2, password);
-	        
 	        ResultSet rs = ps.executeQuery();
+	        
 	        int dbID = 0;
 	        String dbName = "";
 	        String dbPassword = "";
@@ -28,26 +29,25 @@ public class UserService {
 	        if(rs.next()){
 	        	dbID = rs.getInt("user_id");
 	        	dbName = rs.getString("username");
-	    	    dbPassword = rs.getString("password");
-	    	    dbRole = rs.getString("role");
-	    	    dbEmail = rs.getString("email");
+	        	dbPassword = rs.getString("password");
+	        	dbRole = rs.getString("role");
+	        	dbEmail = rs.getString("email");
 	        }
 	        
 	        if(username.equals(dbName) && password.equals(dbPassword)) {
-	        	System.out.println("correctCredential");
-	        	loggedInUser = new User(dbID, dbName, dbPassword, dbRole, dbEmail);
-	        } else {
-	        	System.out.println("wrongCredential");
-	        	//error page
+	        	user = new User(dbID, dbName, dbPassword, dbRole, dbEmail);
 	        }
-	        
-	        conn.close();
-	        
 		} catch (Exception e) {
 			System.out.println("Error :" + e);
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				System.out.println("Error :" + e);
+			}
 		}
 		
-		return loggedInUser;
+		return user;
 	}
 	
 	public int registerUser(String username, String password, String role, String email) {
@@ -56,7 +56,6 @@ public class UserService {
 			Class.forName("com.mysql.jdbc.Driver"); 
 			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
 			Connection conn = DriverManager.getConnection(connURL);
-			Statement stmt = conn.createStatement();
 			String sqlStr = "INSERT INTO User(username, password, role, email) VALUES (?, ?, ?, ?)";
 			PreparedStatement ps = conn.prepareStatement(sqlStr);
 			ps.setString(1, username);
@@ -88,9 +87,9 @@ public class UserService {
 			ps.setString(3, email);
 			ps.setInt(4, userID);
 			numRowsAffected = ps.executeUpdate();
-			if(numRowsAffected > 0) {
-				System.out.print("success");
-			}
+//			if(numRowsAffected > 0) {
+				System.out.println(numRowsAffected);
+//			}
 			conn.close();
 			
 			} catch (Exception e) {
@@ -99,7 +98,7 @@ public class UserService {
 		return numRowsAffected;
 	}
 	
-	public User getUser (int userID) {
+	public User getUserByID (int userID) {
 		
 		User loggedInUser = null;
 		

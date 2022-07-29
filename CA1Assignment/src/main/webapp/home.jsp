@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="models.User"%>
+<%@page import="models.Category"%>
+<%@page import="models.CategoryService"%>
+<%@page import="java.util.ArrayList"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,23 +30,32 @@ body {
 
 </head>
 <body>
-	<%@page import="models.User"%>
-	<%@page import="models.Category"%>
-	<%@page import="models.CategoryService"%>
-	<%@page import="java.util.ArrayList"%>
 
-	<%
-	User user = (User) session.getAttribute("sessUser");
-	Boolean authorized = (Boolean) session.getAttribute("authorized");
+	<%	
+	String role = (String) session.getAttribute("sessRole");
+	Boolean authenticated = (Boolean) session.getAttribute("authenticated");
 
 	CategoryService categoryService = new CategoryService();
 	ArrayList<Category> categories = categoryService.getCategories();
 	%>
 
 	<%@include file="navbar.jsp"%>
-
+	
+	<%
+	String success = (String) request.getAttribute("success");
+	if(success != null) {
+	%>
+		<div class="alert alert-success alert-dismissible fade show position-absolute" role="alert">
+			<%= success %>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	<%
+	}
+	%>
+	
 	<main>
 		<div class="banner-image py-5">
+		
 			<div class="text-center container">
 				<div class="row py-lg-5">
 					<div class="col-lg-6 col-md-8 mx-auto">
@@ -63,26 +77,34 @@ body {
 				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
 					<%
-					for (Category category : categories) {
-						int id = category.getCategoryID();
-						String image = category.getCategoryImage();
-						String name = category.getCategoryName();
-						String description = category.getCategoryDescription();
+					if(categories != null || !(categories.isEmpty())){
+						for (Category category : categories) {
+							int id = category.getCategoryID();
+							String image = category.getCategoryImage();
+							String name = category.getCategoryName();
+							String description = category.getCategoryDescription();
 					%>
-					<div class="col">
-						<div class="card shadow-sm">
-							<img class="card-img-top" alt="attraction" src=<%=image%>>
-							<div class="card-body">
-								<h3><%=name%>
-									Tours
-								</h3>
-								<p class="card-text"><%=description%></p>
-								<form></form>
-								<a class="btn btn-success btn-lg"
-									href="getTours?categoryID=<%=id%>" role="button">Let's Go</a>
+						<div class="col">
+							<div class="card shadow-sm">
+								<img class="card-img-top" alt="attraction" src=<%=image%>>
+								<div class="card-body">
+									<h3><%=name%>
+										Tours
+									</h3>
+									<p class="card-text"><%=description%></p>
+									<form></form>
+									<a class="btn btn-success btn-lg"
+										href="getTours?categoryID=<%=id%>" role="button">Let's Go</a>
+								</div>
 							</div>
 						</div>
-					</div>
+					<%
+						}
+					} else {
+					%>
+						<div class="text-center">
+							<h1>No Categories</h1>
+						</div>
 					<%
 					}
 					%>

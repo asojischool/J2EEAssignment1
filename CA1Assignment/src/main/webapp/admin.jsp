@@ -47,7 +47,7 @@ body {
 	<%@include file="navbarAdmin.jsp"%>
 
 	<div>
-		<h2 style="text-align: center;" class="text-info">Tour Info</h2>
+		<h2 style="text-align:center;" class="text-info">Tour Info</h2>
 	</div>
 
 	<div class="container">

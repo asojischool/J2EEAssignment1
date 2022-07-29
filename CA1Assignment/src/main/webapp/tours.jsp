@@ -30,7 +30,7 @@
 	ArrayList<Tour> tours = tourService.getToursByCategory(categoryID);
 	Category detailedCategory = categoryService.getDetailedCategory(categoryID);
 
-	Boolean authorized = (Boolean) session.getAttribute("authorized");
+	Boolean authenticated = (Boolean) session.getAttribute("authenticated");
 	User user = (User) session.getAttribute("sessUser");
 	%>
 

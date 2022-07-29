@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,23 +39,45 @@ public class updateProfile extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("sessUser");
+		UserService userService = new UserService();
+		Integer userID = (Integer) session.getAttribute("sessID");
+		User user = userService.getUserByID(userID);
 		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
-		int userID = user.getUser_id();
 		
-		UserService userService = new UserService();
+		if(username == null || password == null || email == null || username.equals("") || password.equals("") || email.equals("")) {
+			request.setAttribute("err", "Please enter your username/password/email");
+			RequestDispatcher rd = request.getRequestDispatcher("profile.jsp");
+			rd.forward(request, response);
+			return;
+		}
+		
+		if(username.equals(user.getUsername()) && password.equals(user.getPassword()) && email.equals(user.getEmail())) {
+			request.setAttribute("err", "Nothing is updated");
+			RequestDispatcher rd = request.getRequestDispatcher("profile.jsp");
+			rd.forward(request, response);
+			return;
+		}
+		
 		int numRowsAffected = userService.updateUser(username, password, email, userID);
 		
 		if(numRowsAffected > 0) {
-			user = userService.getUser(userID);
-			session.setAttribute("sessUser", user);
-			response.sendRedirect("home.jsp");
-		}
-		else {
-			response.sendRedirect("profile.jsp??errCode=invalidUpdate");
+			request.setAttribute("success", "Profile Update Successful");
+			RequestDispatcher rd = request.getRequestDispatcher("profile.jsp");
+			rd.forward(request, response);
+			return;
+		} else if(numRowsAffected == 0) {
+			request.setAttribute("err", "Profile Update Unsuccessful");
+			RequestDispatcher rd = request.getRequestDispatcher("profile.jsp");
+			rd.forward(request, response);
+			return;
+		} else {
+			request.setAttribute("err", "Unknown Error");
+			RequestDispatcher rd = request.getRequestDispatcher("profile.jsp");
+			rd.forward(request, response);
+			return;
 		}
 	}
 

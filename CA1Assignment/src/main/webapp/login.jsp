@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,13 +25,22 @@
 	<%!boolean useJS = true;%>
 
 	<%
-	// if logged-in
-	if (session.getAttribute("sessUser") != null && (Boolean) session.getAttribute("authorized") == true) {
-		Boolean sessAuthenticated = (Boolean) session.getAttribute("authorized");
-		System.out.println((Boolean) session.getAttribute("authorized"));
-		if (sessAuthenticated == true) {
+	// if authenticated
+	String role = (String) session.getAttribute("sessRole");
+	Integer id = (Integer) session.getAttribute("sessID");
+	Boolean authenticated = (Boolean) session.getAttribute("authenticated");
+	
+	if (role != null && authenticated == true) {
+		if (role == "member") {
 			response.sendRedirect("home.jsp");
+			return;
 		}
+		if (role == "admin") {
+			response.sendRedirect("admin.jsp");
+			return;
+		}
+		response.sendRedirect("home.jsp");
+		return;
 	}
 	
 	// if existing input

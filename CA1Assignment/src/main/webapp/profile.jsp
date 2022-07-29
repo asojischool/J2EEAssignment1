@@ -1,5 +1,7 @@
+<%@page import="models.UserService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="models.User"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,39 +26,25 @@
 </head>
 
 <body>
-	<%@page import="models.User"%>
+	
 
 	<%@include file="navbar.jsp"%>
 
 	<%!boolean useJS = true;%>
 
 	<%
-	User user = (User) session.getAttribute("sessUser");
-	Boolean authorized = (Boolean) session.getAttribute("authorized");
+	UserService userService = new UserService();
+	User user = null;
+	
+	String role = (String) session.getAttribute("sessRole");
+	Integer id = (Integer) session.getAttribute("sessID");
+	Boolean authenticated = (Boolean) session.getAttribute("authenticated");
 
-	if (useJS) {
-	%>
-	<script>
-		$(document).ready(function() {
-			const queryParams = new URLSearchParams(window.location.search);
-			const errCode = queryParams.get("errCode");
-
-			if (errCode && errCode == "invalidUpdate") {
-				$("#message").css({
-					'display' : 'block'
-				}).html("You have entered an invalid ID/Password/Email");
-			} else {
-				$("#message").css({
-					'display' : 'none'
-				});
-			}
-		});
-	</script>
-	<%
+	if(authenticated == null || authenticated == false) {
+		response.sendRedirect("home.jsp");
+		return;
 	} else {
-	%>
-
-	<%
+		user = userService.getUserByID(id);
 	}
 	%>
 
@@ -67,7 +55,21 @@
 			<div class="col-md-5">
 				<div class="box shadow bg-white p-4">
 					<h1 class="text-center mb-4">Profile</h1>
-					<div id="message" class="alert alert-danger" role="alert"></div>
+					<%
+					// if error
+					String err = (String) request.getAttribute("err");
+					String success = (String) request.getAttribute("success");
+					if (err != null) {
+					%>
+						<div id="message" class="alert alert-danger" role="alert"><%= err %></div>
+					<%
+					}
+					if (success != null) {
+					%>
+						<div id="message" class="alert alert-success" role="alert"><%= success %></div>
+					<%
+					}
+					%>
 					<form action="updateProfile" method="post">
 						<div class="form-floating mb-4">
 							<input class="form-control rounded-0" type="text" name="username"

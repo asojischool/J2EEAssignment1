@@ -67,19 +67,25 @@ public class verifyUser extends HttpServlet {
 		
 		if (user != null) {
 			String userRole = user.getRole();
+			Integer userID = user.getUser_id();
+			request.setAttribute("success", "Login Successful");
 			
 			if (userRole.equals("admin")) {
 				session.setAttribute("sessRole", userRole);
-				session.setAttribute("authorized", true);
-				response.sendRedirect("admin.jsp");
+				session.setAttribute("sessID", userID);
+				session.setAttribute("authenticated", true);
+				RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+				rd.forward(request, response);
+				return;
 			} else if (userRole.equals("member")) {
 				session.setAttribute("sessRole", userRole);
-				session.setAttribute("authorized", true);
-				response.sendRedirect("home.jsp");
+				session.setAttribute("sessID", userID);
+				session.setAttribute("authenticated", true);
+				RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
+				rd.forward(request, response);
+				return;
 			}
-			
 		}
-
 	}
 
 	/**

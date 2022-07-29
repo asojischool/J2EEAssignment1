@@ -29,9 +29,8 @@ body {
 					<li class="nav-item"><a class="nav-link" href="home.jsp">Home</a></li>
 				</ul>
 				<%
-				if (session.getAttribute("sessUser") != null && (Boolean) session.getAttribute("authorized") == true) {
+				if (session.getAttribute("sessRole") != null && (Boolean) session.getAttribute("authenticated") == true) {
 				%>
-
 				<ul class="navbar-nav ms-auto">
 					<li class="nav-item px-3"><a class="nav-link"
 						href="profile.jsp" type="button">Edit Profile</a></li>

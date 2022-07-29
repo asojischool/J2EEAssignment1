@@ -28,7 +28,7 @@ body {
 					<li class="nav-item"><a class="nav-link" href="admin.jsp">Home</a></li>
 				</ul>
 				<%
-				if (session.getAttribute("sessUser") != null && (Boolean) session.getAttribute("authorized") == true) {
+				if (session.getAttribute("sessUser") != null && (Boolean) session.getAttribute("authenticated") == true) {
 				%>
 
 				<ul class="navbar-nav ms-auto">
