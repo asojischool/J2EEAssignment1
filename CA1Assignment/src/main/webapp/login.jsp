@@ -26,6 +26,7 @@
 
 	<%
 	// if authenticated
+	/* HttpSession sess = request.getSession(false); */
 	String role = (String) session.getAttribute("sessRole");
 	Integer id = (Integer) session.getAttribute("sessID");
 	Boolean authenticated = (Boolean) session.getAttribute("authenticated");

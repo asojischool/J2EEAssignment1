@@ -68,7 +68,7 @@ public class verifyUser extends HttpServlet {
 		if (user != null) {
 			String userRole = user.getRole();
 			Integer userID = user.getUser_id();
-			request.setAttribute("success", "Login Successful");
+			request.setAttribute("successMsg", "Login Successful");
 			
 			if (userRole.equals("admin")) {
 				session.setAttribute("sessRole", userRole);

@@ -31,7 +31,7 @@ public class logout extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		request.setAttribute("success", "Log Out Successful");
+		request.setAttribute("successMsg", "Log Out Successful");
 		RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
 		rd.forward(request, response);
 		return;

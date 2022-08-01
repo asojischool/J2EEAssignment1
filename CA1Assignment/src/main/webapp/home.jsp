@@ -21,7 +21,7 @@ body {
 }
 </style>
 <meta charset="ISO-8859-1">
-<title>Home.jsp</title>
+<title>Home</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -42,7 +42,7 @@ body {
 	<%@include file="navbar.jsp"%>
 	
 	<%
-	String success = (String) request.getAttribute("success");
+	String success = (String) request.getAttribute("successMsg");
 	if(success != null) {
 	%>
 		<div class="alert alert-success alert-dismissible fade show position-absolute" role="alert">
@@ -94,7 +94,7 @@ body {
 									<p class="card-text"><%=description%></p>
 									<form></form>
 									<a class="btn btn-success btn-lg"
-										href="getTours?categoryID=<%=id%>" role="button">Let's Go</a>
+										href="tours.jsp?categoryID=<%=id%>" role="button">Let's Go</a>
 								</div>
 							</div>
 						</div>
