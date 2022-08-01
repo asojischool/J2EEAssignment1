@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>	
+	pageEncoding="ISO-8859-1"%>
+<%@page import="models.User"%>
+<%@page import="models.UserService"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,17 +23,18 @@
 	crossorigin="anonymous" />
 </head>
 <body>
-
-	<%!boolean useJS = true;%>
+	
 
 	<%
-	// if authenticated
-	/* HttpSession sess = request.getSession(false); */
-	String role = (String) session.getAttribute("sessRole");
-	Integer id = (Integer) session.getAttribute("sessID");
-	Boolean authenticated = (Boolean) session.getAttribute("authenticated");
+	Integer userID = (Integer) session.getAttribute("sessID");
 	
-	if (role != null && authenticated == true) {
+	if (userID != null) {
+		/* int userID = (int) session.getAttribute("userID"); */
+		
+		UserService userService = new UserService();
+		User user = (User) userService.getUserByID(userID);
+		String role = user.getRole();
+		
 		if (role == "member") {
 			response.sendRedirect("home.jsp");
 			return;
@@ -47,8 +50,10 @@
 	// if existing input
 	String tempUsername = (String) request.getAttribute("tempUsername");
 	String tempPassword = (String) request.getAttribute("tempPassword");
-	if (tempUsername == null && tempPassword == null){
+	if (tempUsername == null){
 		tempUsername = "";
+	}
+	if (tempPassword == null){
 		tempPassword = "";
 	}
 	%>
