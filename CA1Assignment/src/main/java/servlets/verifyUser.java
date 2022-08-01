@@ -35,6 +35,20 @@ public class verifyUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		UserService userService = new UserService();
+		
+		if(session.getAttribute("sessID") != null) {
+			int userID = (int) session.getAttribute("sessID");
+			User tempUser = userService.getUserByID(userID);
+			if(tempUser.getRole() == "admin") {
+				response.sendRedirect("admin.jsp"); 
+				return;
+			}
+			else {
+				response.sendRedirect("home.jsp"); 
+				return;
+			}
+		}
 
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -50,7 +64,6 @@ public class verifyUser extends HttpServlet {
 		}
 		
 		// authenticate
-		UserService userService = new UserService();
 		User user = userService.verifyUser(username, password);
 		
 		if (user == null) {

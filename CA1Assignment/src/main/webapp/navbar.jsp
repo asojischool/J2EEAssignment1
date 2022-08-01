@@ -19,10 +19,6 @@ body {
 	crossorigin="anonymous" />
 </head>
 <body>
-	<%
-		Boolean navAuthentication = (Boolean) session.getAttribute("authenticated");
-	%>
-
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark p-md-3">
 		<div class="container-fluid">
@@ -32,7 +28,7 @@ body {
 					<li class="nav-item"><a class="nav-link" href="home.jsp">Home</a></li>
 				</ul>
 				<%
-				if (navAuthentication != null && navAuthentication) {
+				if (session.getAttribute("sessID") != null) {
 				%>
 				<ul class="navbar-nav ms-auto">
 					<li class="nav-item px-3"><a class="nav-link"

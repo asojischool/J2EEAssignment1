@@ -29,8 +29,6 @@
 	Integer userID = (Integer) session.getAttribute("sessID");
 	
 	if (userID != null) {
-		/* int userID = (int) session.getAttribute("userID"); */
-		
 		UserService userService = new UserService();
 		User user = (User) userService.getUserByID(userID);
 		String role = user.getRole();
