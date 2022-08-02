@@ -60,7 +60,13 @@ img {
 	int tourID = Integer.parseInt(tempTourID);
 	
 	TourService tourService = new TourService();
+	
 	Tour detailedTour = tourService.getDetailedTour(tourID);
+	if(detailedTour == null) {
+		response.sendRedirect("home.jsp");
+		return;
+	}
+	
 	CategoryService categoryService = new CategoryService();
 
 	%>
@@ -102,11 +108,12 @@ img {
 				</div>
 				<div class="col-4">
 					<div class="mt-3">
-						<h4>Add To Cart</h4>
-						<form>
-							<label>Quantity</label>
-							<input type="number" name="quantity">
-							<input type="submit" value="Submit">
+						<h4>Book this Tour</h4>
+						<form action="addToCart" method="post">
+							<label>Quantity:</label>
+							<input type="hidden" name="tourID" value="<%= detailedTour.getTour_id() %>">
+							<input type="number" name="quantity" min="1" max="10"><br><br>
+							<input type="submit" value="Add to Cart">
 						</form>
 					</div>
 				</div>
