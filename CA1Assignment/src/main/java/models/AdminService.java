@@ -20,7 +20,7 @@ public class AdminService {
 				String dbName = rs.getString("tour_name");
 				String dbBriefDescription = rs.getString("brief_description");
 				String dbFullDescription = rs.getString("detail_description");
-				int dbPrice = rs.getInt("price");
+				double dbPrice = rs.getDouble("price");
 				int dbAvailableSlots = rs.getInt("available_slots");
 				int dbCategoryID = rs.getInt("tour_category_id");
 				String dbImage = rs.getString("image_location");
@@ -28,7 +28,9 @@ public class AdminService {
 						dbCategoryID, dbImage));
 				tourStr += "<tr><td class=\"box shadow bg-white p-4\">" + dbID + "</td><td class=\"box shadow bg-white p-4\">" + dbName +
 						"</td><td class=\"box shadow bg-white p-4\"><form action=\"adminEdit.jsp?id=" + 
-						dbID + "&name=" + dbName + "\" method=\"post\"><input type=\"submit\" value=\"edit\"></form></td></tr>";
+						dbID + "&name=" + dbName + "&brief=" + dbBriefDescription + "&full=" + dbFullDescription + 
+						"&price=" + dbPrice + "&slots=" + dbAvailableSlots + "&catID=" + dbCategoryID + "&image=" + dbImage +
+						"\" method=\"post\"><input type=\"submit\" value=\"edit\"></form></td></tr>";
 			}
 			tourStr += "</table>";
 			conn.close();
@@ -57,7 +59,7 @@ public class AdminService {
 			}
 		return numRowsAffected;
 	}
-	public int adminUpdate(int id, String name, String briefDescription, String fullDescription, int price, int slots, int catID, String image) {
+	public int adminUpdate(int id, String name, String briefDescription, String fullDescription, double price, int slots, int catID, String image) {
 		int numRowsAffected = 0;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -69,7 +71,7 @@ public class AdminService {
 			ps.setString(1,name);
 			ps.setString(2,briefDescription);
 			ps.setString(3,fullDescription);
-			ps.setInt(4,price);
+			ps.setDouble(4,price);
 			ps.setInt(5,slots);
 			ps.setInt(6,catID);
 			ps.setString(7,image);
@@ -81,7 +83,7 @@ public class AdminService {
 			}
 		return numRowsAffected;
 	}
-	public int adminInsert(String name, String briefDescription, String fullDescription, int price, int slots, int catID, String image) {
+	public int adminInsert(String name, String briefDescription, String fullDescription, double price, int slots, int catID, String image) {
 		int numRowsAffected = 0;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -93,7 +95,7 @@ public class AdminService {
 			ps.setString(1, name);
 			ps.setString(2, briefDescription);
 			ps.setString(3, fullDescription);
-			ps.setInt(4, price);
+			ps.setDouble(4, price);
 			ps.setInt(5, slots);
 			ps.setInt(6, catID);
 			ps.setString(7, image);

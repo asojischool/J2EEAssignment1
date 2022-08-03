@@ -1,29 +1,26 @@
 package servlets;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import models.Tour;
-import models.AdminService;
 import javax.servlet.http.HttpSession;
 
+import models.UserService;
+
 /**
- * Servlet implementation class adminDelete
+ * Servlet implementation class allUser
  */
-@WebServlet("/adminDelete")
-public class adminDelete extends HttpServlet {
+@WebServlet("/allUser")
+public class allUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public adminDelete() {
+    public allUser() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,23 +32,12 @@ public class adminDelete extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		String idStr = request.getParameter("id");
-		int id = Integer.parseInt(idStr);
-		AdminService adminService = new AdminService();
-		int numRowsAffected = adminService.adminDelete(id);
+		UserService userService = new UserService();
+		String users = userService.allUser();
+		HttpSession session = request.getSession();
 		
-		if(numRowsAffected > 0) {
-			request.setAttribute("successMsg", "Tour Successsfully Deleted");
-			RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
-			rd.forward(request, response);
-			return;
-		}
-		else {
-			request.setAttribute("err", "Tour Delete Failed");
-			RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
-			rd.forward(request, response);
-			return;
-		}
+		session.setAttribute("userStr", users);
+		response.sendRedirect("customer.jsp");
 	}
 
 	/**

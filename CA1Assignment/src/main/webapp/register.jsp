@@ -16,36 +16,32 @@
 </head>
 <body>
 
-	<%!boolean useJS = true;%>
 
 	<%
-	if (useJS) {
-	%>
-	<script>
-		$(document).ready(function() {
-			const queryParams = new URLSearchParams(window.location.search);
-			const errCode = queryParams.get("errCode");
-
-			if (errCode && errCode == "invalidRegister") {
-				$("#message").css({
-					'display' : 'block'
-				}).html("Username/email is already taken.");
-			} else {
-				$("message").css({
-					'display' : 'none'
-				});
-			}
-		});
-	</script>
-	<%
-	} else {
-	%>
-
-	<%
-	}
+	String tempUsername = (String) request.getAttribute("tempUsername");
+	String tempPassword = (String) request.getAttribute("tempPassword");
+	String tempEmail = (String) request.getAttribute("tempEmail");
+	if (tempUsername == null){
+		tempUsername = "";
+	} 
+	if (tempPassword == null){
+		tempPassword = "";
+	} 
+	if (tempEmail == null){
+		tempEmail = "";
+	} 
 	%>
     <%@include file="navbar.jsp"%>
-	<h1 id="message" style="color:red;"></h1>
+
+	<%
+					// if error
+					String err = (String) request.getAttribute("err");
+					if (err != null) {
+					%>
+						<div id="message" class="alert alert-danger" role="alert"><%= err %></div>
+					<%
+					}
+					%>
 	
 	<div class="container">
 		<div
@@ -56,24 +52,18 @@
 					<form action="registerUser" method="post">
 						<div class="form-floating mb-4">
 							<input class="form-control rounded-0" type="text" name="username"
-								placeholder="username" id="floatingUsername"> <label
+								placeholder="username" id="floatingUsername" value="<%=tempUsername%>"> <label
 								for="floatingUsername">Username</label>
 						</div>
 						<div class="form-floating mb-4">
 							<input class="form-control rounded-0" type="text" name="email"
-								placeholder="email" id="floatingEmail"> <label
+								placeholder="email" id="floatingEmail" value="<%=tempEmail%>"> <label
 								for="floatingEmail">Email</label>
 						</div>
 						<div class="form-floating mb-4">
-							<input class="form-control rounded-0" type="password"
+							<input class="form-control rounded-0" type="password" value="<%=tempPassword%>"
 								name="password" placeholder="password" id="floatingPassword">
 							<label for="floatingPassword">Password</label>
-						</div>
-						<div class="form-floating mb-4">
-							<input  type="radio" name="radio1" value="Public User">Public User
-						</div>
-						<div class="form-floating mb-4">
-							<input  type="radio" name="radio1" value="Business Owner">Business Owner
 						</div>
 						<div class="d-grid gap-2 mb-4">
 							<input class="btn btn-success fs-5" type="submit"

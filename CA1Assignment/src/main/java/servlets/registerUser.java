@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,17 +35,33 @@ public class registerUser extends HttpServlet {
 		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		String role = request.getParameter("radio1");
+		String role = "member";
 		String email = request.getParameter("email");
+		
+		if (username.equals("") || password.equals("") || email.equals("") || username == null || password == null || email == null) {
+			request.setAttribute("err", "Please fill in all fields");
+			request.setAttribute("tempUsername", username);
+			request.setAttribute("tempPassword", password);
+			request.setAttribute("tempEmail", email);
+			RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+			rd.forward(request, response);
+			return;
+		}
 		
 		UserService userService = new UserService();
 		int numRowsAffected = userService.registerUser(username, password, role, email);
 		
 		if(numRowsAffected > 0) {
-			response.sendRedirect("login.jsp");
+			request.setAttribute("successMsg", "Register Successful");
+			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+			rd.forward(request, response);
+			return;
 		}
 		else {
-			response.sendRedirect("register.jsp?errCode=invalidRegister");
+			request.setAttribute("err", "Register Failed");
+			RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+			rd.forward(request, response);
+			return;
 		}
 		
 	}
