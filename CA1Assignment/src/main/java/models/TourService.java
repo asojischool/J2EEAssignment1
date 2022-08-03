@@ -25,7 +25,7 @@ public class TourService {
 				String dbName = rs.getString("tour_name");
 				String dbBriefDescription = rs.getString("brief_description");
 				String dbFullDescription = rs.getString("detail_description");
-				int dbPrice = rs.getInt("price");
+				double dbPrice = rs.getDouble("price");
 				int dbAvailableSlots = rs.getInt("available_slots");
 				int dbCategoryID = rs.getInt("tour_category_id");
 				String dbImage = rs.getString("image_location");
@@ -63,7 +63,7 @@ public class TourService {
 				String dbName = rs.getString("tour_name");
 				String dbBriefDescription = rs.getString("brief_description");
 				String dbFullDescription = rs.getString("detail_description");
-				int dbPrice = rs.getInt("price");
+				double dbPrice = rs.getDouble("price");
 				int dbAvailableSlots = rs.getInt("available_slots");
 				int dbCategoryID = rs.getInt("tour_category_id");
 				String dbImage = rs.getString("image_location");
@@ -101,7 +101,7 @@ public class TourService {
 				String dbName = rs.getString("tour_name");
 				String dbBriefDescription = rs.getString("brief_description");
 				String dbFullDescription = rs.getString("detail_description");
-				int dbPrice = rs.getInt("price");
+				double dbPrice = rs.getDouble("price");
 				int dbAvailableSlots = rs.getInt("available_slots");
 				int dbCategoryID = rs.getInt("tour_category_id");
 				String dbImage = rs.getString("image_location");

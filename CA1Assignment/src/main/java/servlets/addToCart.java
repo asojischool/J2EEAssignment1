@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import models.CartItem;
+import models.TourService;
 
 /**
  * Servlet implementation class addToCart
@@ -35,13 +37,29 @@ public class addToCart extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		HttpSession session = request.getSession();
+		TourService tourService = new TourService();
 		
-//		String tourID = request.getParameter("tourID");
-//		String quantity = request.getParameter("quantity");
-//		System.out.println("Tour ID: " + tourID + ", Quantity: " + quantity);
+		// check if user is login
+		Integer userID = (Integer) session.getAttribute("sessID");
+		if (userID == null) {
+			request.setAttribute("err", "Please login to use the cart");
+			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+			rd.forward(request, response);
+			return;
+		}
 		
 		Integer tourID = Integer.parseInt((String) request.getParameter("tourID"));
 		Integer quantity = Integer.parseInt((String) request.getParameter("quantity"));
+		Boolean dup = false;
+		int cartIdx = 0;
+		
+		// check if tour is available or not
+		if(tourService.getDetailedTour(tourID) == null) {
+			request.setAttribute("errMsg", "Tour not found");
+			RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
+			rd.forward(request, response);
+			return;
+		}
 		
 		// CartItem cartItem = new CartItem(tourID, quantity);
 		if (session.getAttribute("cart") == null) {
@@ -51,8 +69,22 @@ public class addToCart extends HttpServlet {
 		} else {
 			@SuppressWarnings("unchecked")
 			ArrayList<CartItem> cart = (ArrayList<CartItem>) session.getAttribute("cart");
-			cart.add(new CartItem(tourID, quantity));
-			session.setAttribute("cart", cart);
+			for (int i = 0; i < cart.size(); i++) {
+				if(cart.get(i).getTourID() == tourID) {
+					dup = true;
+					cartIdx = i;
+					break;
+				}
+			}
+			if(dup) {
+				CartItem cartItem = cart.get(cartIdx);
+				cartItem.setQuantity(cart.get(cartIdx).getQuantity() + quantity);
+				cart.set(cartIdx, cartItem);
+				session.setAttribute("cart", cart);
+			} else {
+				cart.add(new CartItem(tourID, quantity));
+				session.setAttribute("cart", cart);
+			}
 		}
 		response.sendRedirect("detailedTour.jsp?tourID=" + tourID);
 		

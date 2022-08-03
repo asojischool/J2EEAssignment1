@@ -93,11 +93,11 @@ img {
 							</div>
 							<div class="fs-6">
 								<i class="bi bi-person fa-3x align-middle mr-2 text-danger"></i>
-								<p class="align-middle d-inline fw-bold iconText">Slots: <%=detailedTour.getAvailableSlots() %></p>
+								<p class="align-middle d-inline fw-bold iconText">Available Slots: <%=detailedTour.getAvailableSlots() %></p>
 							</div>
 							<div class="fs-6">
 								<i class="bi bi-currency-dollar fa-3x align-middle text-danger"></i>
-								<p class="align-middle d-inline fw-bold iconText">Cost: <%=detailedTour.getPrice() %></p>
+								<p class="align-middle d-inline fw-bold iconText">Price: <%= String.format("%.2f", detailedTour.getPrice()) %></p>
 							</div>
 							<br>
 						</div>
@@ -112,8 +112,8 @@ img {
 						<form action="addToCart" method="post">
 							<label>Quantity:</label>
 							<input type="hidden" name="tourID" value="<%= detailedTour.getTour_id() %>">
-							<input type="number" name="quantity" min="1" max="10"><br><br>
-							<input type="submit" value="Add to Cart">
+							<input type="number" name="quantity" min=1 max=10 value=1><br><br>
+							<input class="btn btn-success" type="submit" value="Add to Cart">
 						</form>
 					</div>
 				</div>

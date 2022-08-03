@@ -5,12 +5,12 @@ public class Tour {
 	private String tour_name;
 	private String briefDescription;
 	private String fullDescription;
-	private int price;
+	private double price;
 	private int availableSlots;
 	private int categoryID;
 	private String image;
 	
-	public Tour(int tour_id, String tour_name, String briefDescription, String fullDescription, int price,
+	public Tour(int tour_id, String tour_name, String briefDescription, String fullDescription, double price,
 			int availableSlots, int categoryID, String image) {
 		super();
 		this.tour_id = tour_id;
@@ -55,11 +55,11 @@ public class Tour {
 		this.fullDescription = fullDescription;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
