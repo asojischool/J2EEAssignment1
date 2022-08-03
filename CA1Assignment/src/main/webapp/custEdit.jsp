@@ -35,7 +35,6 @@
 	<div>
 		<h2 style="text-align: center;" class="text-info">Edit Customer</h2>
 	</div>
-	
 	<div class="container">
 		<table
 			class="row d-flex justify-content-center height height align-content-center">
