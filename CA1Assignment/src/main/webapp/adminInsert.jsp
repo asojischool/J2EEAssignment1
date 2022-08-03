@@ -28,7 +28,7 @@
 
 	<%@page import="models.User" %>
 	
-	<%-- <%
+	<%
 	User user = (User) session.getAttribute("sessUser");
 	if (user == null) {
 		response.sendRedirect("home.jsp");
@@ -38,50 +38,6 @@
 			response.sendRedirect("home.jsp");
 		}
 	}
-	%> --%>
-	
-	<%
-		String image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEjP5eJ4WIGuhEMAXpp2M11odo9HItPz3c3fAvPNzu_0nEXyeP";
-	%>
-	
-	<%
-		String err = (String) request.getAttribute("err");
-		if (err != null) {
-	%>
-		<div id="message" class="alert alert-danger" role="alert"><%= err %></div>
-	<%
-		}
-	%>
-	
-	<%
-		String tempName = (String) request.getAttribute("tempName");
-		String tempBrief = (String) request.getAttribute("tempBrief");
-		String tempFull = (String) request.getAttribute("tempFull");
-		String tempPrice = (String) request.getAttribute("tempPrice");
-		String tempSlots = (String) request.getAttribute("tempSlots");
-		String tempCatID = (String) request.getAttribute("tempCatID");
-		String tempImage = (String) request.getAttribute("tempImage");
-		if (tempName == null){
-			tempName = "";
-		} 
-		if (tempBrief == null){
-			tempBrief = "";
-		} 
-		if (tempFull == null){
-			tempFull = "";
-		} 
-		if (tempPrice == null){
-			tempPrice = "";
-		} 
-		if (tempSlots == null){
-			tempSlots = "";
-		} 
-		if (tempCatID == null){
-			tempCatID = "";
-		} 
-		if (tempImage != null){
-			image = tempImage;
-		} 
 	%>
 
 	<div>
@@ -93,31 +49,31 @@
 			<form action="adminInsert" method="post">
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Tour Name: </td>
-					<td class="box shadow bg-white p-4"><input type="text" name="name" value="<%=tempName %>"></td>
+					<td class="box shadow bg-white p-4"><input type="text" name="name"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Brief Description</td>
-					<td class="box shadow bg-white p-4"><input type="text" name="briefDescription" value="<%=tempBrief %>"></td>
+					<td class="box shadow bg-white p-4"><input type="text" name="briefDescription"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Full Description</td>
-					<td class="box shadow bg-white p-4"><input type="text" name="fullDescription" value="<%=tempFull %>"></td>
+					<td class="box shadow bg-white p-4"><input type="text" name="fullDescription"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Price</td>
-					<td class="box shadow bg-white p-4"><input type="number" name="price" value="<%=tempPrice %>"></td>
+					<td class="box shadow bg-white p-4"><input type="number" name="price"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Available Slots</td>
-					<td class="box shadow bg-white p-4"><input type="number" name="slots" value="<%=tempSlots %>"></td>
+					<td class="box shadow bg-white p-4"><input type="number" name="slots"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Category ID</td>
-					<td class="box shadow bg-white p-4"><input type="number" name="catID" value="<%=tempCatID %>"></td>
+					<td class="box shadow bg-white p-4"><input type="number" name="catID"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Image URL</td>
-					<td class="box shadow bg-white p-4"><input type="text" name="image" value="<%=image %>"></td>
+					<td class="box shadow bg-white p-4"><input type="text" name="image" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEjP5eJ4WIGuhEMAXpp2M11odo9HItPz3c3fAvPNzu_0nEXyeP"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="d-grid gap-2 mb-4"><input class="btn btn-success fs-5" type="submit" value="Submit"></td>

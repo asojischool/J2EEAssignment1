@@ -1,8 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,18 +38,7 @@ public class adminDelete extends HttpServlet {
 		AdminService adminService = new AdminService();
 		int numRowsAffected = adminService.adminDelete(id);
 		
-		if(numRowsAffected > 0) {
-			request.setAttribute("successMsg", "Tour Successsfully Deleted");
-			RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
-			rd.forward(request, response);
-			return;
-		}
-		else {
-			request.setAttribute("err", "Tour Delete Failed");
-			RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
-			rd.forward(request, response);
-			return;
-		}
+		response.sendRedirect("admin.jsp");
 	}
 
 	/**

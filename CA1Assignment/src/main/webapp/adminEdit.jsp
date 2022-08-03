@@ -35,13 +35,8 @@ body {
 <body>
 
 	<%@page import="models.User"%>
-	
-	<%
-		String url = request.getRequestURL().toString(); 
-		request.setAttribute("url", url);
-	%>
 
-	<%-- <%
+	<%
 	User user = (User) session.getAttribute("sessUser");
 	if (user == null) {
 		response.sendRedirect("home.jsp");
@@ -51,24 +46,13 @@ body {
 			response.sendRedirect("home.jsp");
 		}
 	}
-	%> --%>
+	%>
 
 	<%
 	String id = request.getParameter("id");
-
+	%>
+	<%
 	String name = request.getParameter("name");
-	
-	String brief = request.getParameter("brief");
-	
-	String full = request.getParameter("full");
-	
-	String price = request.getParameter("price");
-	
-	String slots = request.getParameter("slots");
-	
-	String catID = request.getParameter("catID");
-	
-	String image = request.getParameter("image");
 	%>
 
 	<%@include file="navbarAdmin.jsp"%>
@@ -94,32 +78,32 @@ body {
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Brief Description</td>
 					<td class="box shadow bg-white p-4"><input type="text"
-						value="<%=brief%>" name="briefDescription"></td>
+						name="briefDescription"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Full Description</td>
 					<td class="box shadow bg-white p-4"><input type="text"
-						value="<%=full%>" name="fullDescription"></td>
+						name="fullDescription"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Price</td>
 					<td class="box shadow bg-white p-4"><input type="number"
-						value="<%=price%>" name="price"></td>
+						name="price"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Available Slots</td>
 					<td class="box shadow bg-white p-4"><input type="number"
-						value="<%=slots%>" name="slots"></td>
+						name="slots"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Category ID</td>
 					<td class="box shadow bg-white p-4"><input type="number"
-						value="<%=catID%>" name="catID"></td>
+						name="catID"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Image URL</td>
 					<td class="box shadow bg-white p-4"><input type="text"
-						value="<%=image%>" name="image"></td>
+						name="image"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="d-grid gap-2 mb-4"><input

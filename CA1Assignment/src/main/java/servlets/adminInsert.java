@@ -1,8 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,43 +35,17 @@ public class adminInsert extends HttpServlet {
 		String briefDescription = request.getParameter("briefDescription");
 		String fullDescription = request.getParameter("fullDescription");
 		String priceStr = request.getParameter("price");
+		int price = Integer.parseInt(priceStr);
 		String slotsStr = request.getParameter("slots");
-		String catIDStr = request.getParameter("catID");
-		String image = request.getParameter("image");
-		
-		if (name.equals("") || briefDescription.equals("") || fullDescription.equals("") || priceStr.equals("") || slotsStr.equals("") || catIDStr.equals("") || image.equals("")|| name == null || briefDescription == null || fullDescription == null || priceStr == null || slotsStr == null || catIDStr == null || image == null) {
-			request.setAttribute("err", "Please fill in all fields");
-			request.setAttribute("tempName", name);
-			request.setAttribute("tempBrief", briefDescription);
-			request.setAttribute("tempFull", fullDescription);
-			request.setAttribute("tempPrice", priceStr);
-			request.setAttribute("tempSlots", slotsStr);
-			request.setAttribute("tempCatID", catIDStr);
-			request.setAttribute("tempImage", image);
-			RequestDispatcher rd = request.getRequestDispatcher("adminInsert.jsp");
-			rd.forward(request, response);
-			return;
-		}
-		
-		double price = Double.parseDouble(priceStr);
 		int slots = Integer.parseInt(slotsStr);
+		String catIDStr = request.getParameter("catID");
 		int catID = Integer.parseInt(catIDStr);
+		String image = request.getParameter("image");
 		
 		AdminService adminService = new AdminService();
 		int numRowsAffected = adminService.adminInsert(name, briefDescription, fullDescription, price, slots, catID, image);
 		
-		if(numRowsAffected > 0) {
-			request.setAttribute("successMsg", "Tour Successsfully Added");
-			RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
-			rd.forward(request, response);
-			return;
-		}
-		else {
-			request.setAttribute("err", "Failed to add Tour");
-			RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
-			rd.forward(request, response);
-			return;
-		}
+		response.sendRedirect("admin.jsp");
 	}
 
 	/**

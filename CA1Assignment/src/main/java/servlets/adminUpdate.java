@@ -1,8 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,36 +37,17 @@ public class adminUpdate extends HttpServlet {
 		String briefDescription = request.getParameter("briefDescription");
 		String fullDescription = request.getParameter("fullDescription");
 		String priceStr = request.getParameter("price");
+		int price = Integer.parseInt(priceStr);
 		String slotsStr = request.getParameter("slots");
+		int slots = Integer.parseInt(slotsStr);
 		String catIDStr = request.getParameter("catID");
+		int catID = Integer.parseInt(catIDStr);
 		String image = request.getParameter("image");
 		
-		if (name.equals("") || briefDescription.equals("") || fullDescription.equals("") || priceStr.equals("") || slotsStr.equals("") || catIDStr.equals("") || image.equals("")|| name == null || briefDescription == null || fullDescription == null || priceStr == null || slotsStr == null || catIDStr == null || image == null) {
-			request.setAttribute("err", "Tour Update Failed");
-			RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
-			rd.forward(request, response);
-			return;
-		}
-		
-		double price = Double.parseDouble(priceStr);
-		int slots = Integer.parseInt(slotsStr);
-		int catID = Integer.parseInt(catIDStr);
-		
 		AdminService adminService = new AdminService();
-		int numRowsAffected = adminService.adminUpdate(id, name, briefDescription, fullDescription, price, slots, catID, image);
+		int numRowsAffeted = adminService.adminUpdate(id, name, briefDescription, fullDescription, price, slots, catID, image);
 		
-		if(numRowsAffected > 0) {
-			request.setAttribute("successMsg", "Tour Successsfully Updated");
-			RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
-			rd.forward(request, response);
-			return;
-		}
-		else {
-			request.setAttribute("err", "Tour Update Failed");
-			RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
-			rd.forward(request, response);
-			return;
-		}
+		response.sendRedirect("admin.jsp");
 	}
 
 	/**

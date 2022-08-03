@@ -16,6 +16,12 @@
 	background-position: center;
 }
 
+.card-img-top {
+    width: 100%;
+    height: 314px;
+    object-fit: cover;
+}
+
 body {
 	padding-top: 72px;
 }
@@ -32,9 +38,6 @@ body {
 <body>
 
 	<%	
-	String role = (String) session.getAttribute("sessRole");
-	Boolean authenticated = (Boolean) session.getAttribute("authenticated");
-
 	CategoryService categoryService = new CategoryService();
 	ArrayList<Category> categories = categoryService.getCategories();
 	%>
@@ -43,10 +46,21 @@ body {
 	
 	<%
 	String success = (String) request.getAttribute("successMsg");
+	String err = (String) request.getAttribute("errMsg");
+	
 	if(success != null) {
 	%>
 		<div class="alert alert-success alert-dismissible fade show position-absolute" role="alert">
 			<%= success %>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	<%
+	}
+	
+	if(err != null) {
+	%>
+		<div class="alert alert-danger alert-dismissible fade show position-absolute" role="alert">
+			<%= err %>
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		</div>
 	<%
@@ -92,7 +106,6 @@ body {
 										Tours
 									</h3>
 									<p class="card-text"><%=description%></p>
-									<form></form>
 									<a class="btn btn-success btn-lg"
 										href="tours.jsp?categoryID=<%=id%>" role="button">Let's Go</a>
 								</div>

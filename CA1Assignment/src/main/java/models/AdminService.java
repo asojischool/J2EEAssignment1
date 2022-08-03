@@ -20,7 +20,7 @@ public class AdminService {
 				String dbName = rs.getString("tour_name");
 				String dbBriefDescription = rs.getString("brief_description");
 				String dbFullDescription = rs.getString("detail_description");
-				double dbPrice = rs.getDouble("price");
+				double dbPrice = rs.getInt("price");
 				int dbAvailableSlots = rs.getInt("available_slots");
 				int dbCategoryID = rs.getInt("tour_category_id");
 				String dbImage = rs.getString("image_location");
@@ -28,9 +28,7 @@ public class AdminService {
 						dbCategoryID, dbImage));
 				tourStr += "<tr><td class=\"box shadow bg-white p-4\">" + dbID + "</td><td class=\"box shadow bg-white p-4\">" + dbName +
 						"</td><td class=\"box shadow bg-white p-4\"><form action=\"adminEdit.jsp?id=" + 
-						dbID + "&name=" + dbName + "&brief=" + dbBriefDescription + "&full=" + dbFullDescription + 
-						"&price=" + dbPrice + "&slots=" + dbAvailableSlots + "&catID=" + dbCategoryID + "&image=" + dbImage +
-						"\" method=\"post\"><input type=\"submit\" value=\"edit\"></form></td></tr>";
+						dbID + "&name=" + dbName + "\" method=\"post\"><input type=\"submit\" value=\"edit\"></form></td></tr>";
 			}
 			tourStr += "</table>";
 			conn.close();

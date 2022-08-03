@@ -26,7 +26,7 @@ body {
 	<%@page import="models.AdminService"%>
 	<%@page import="models.User"%>
 
-	<%-- <%
+	<%
 	User user = (User) session.getAttribute("sessUser");
 	if (user == null) {
 		response.sendRedirect("home.jsp");
@@ -36,24 +36,8 @@ body {
 			response.sendRedirect("home.jsp");
 		}
 	}
-	%> --%>
-	<%
-		String err = (String) request.getAttribute("err");
-		if (err != null) {
 	%>
-		<div id="message" class="alert alert-danger" role="alert"><%= err %></div>
-	<%
-		}
-	%>
-	
-	<%
-		String successMsg = (String) request.getAttribute("successMsg");
-		if (successMsg != null) {
-	%>
-		<div id="message" class="alert alert-success" role="alert"><%= successMsg %></div>
-	<%
-		}
-	%>
+
 
 	<%
 	AdminService adminService = new AdminService();
