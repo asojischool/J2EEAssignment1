@@ -74,13 +74,9 @@
 				</div>
 				<div class="col-6">
 					<h3><%=name%></h3><br>
-					<p>Price: <%=price%></p>
+					<p>Price: <%=String.format("%.2f", price)%></p>
 					<p>Slots: <%=slots%></p>
-					<p>Know of any relatives or people who are Hainanese? Learn
-						more about how the early Hainanese came into Singapore and the
-						lives that they’ve led. Not forgetting the important Hainanese
-						contribution to the food culture in Singapore! Cook your own
-						scrumptious Hainanese dishes under the guidance of our chef!</p>
+					<p><%= briefDescription %></p>
 					<a class="btn btn-success btn-lg"
 						href="detailedTour.jsp?tourID=<%=id%>" role="button">Read More</a>
 				</div>
