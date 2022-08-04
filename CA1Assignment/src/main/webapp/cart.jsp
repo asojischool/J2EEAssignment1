@@ -79,7 +79,7 @@ body {
 								// check if tour is available
 								if(tour == null) {
 									cart.remove(i);
-									// check if empty after removing, to refresh
+									// check if empty after removing, to refresh 
 									if(cart.size() == 0) {
 										response.sendRedirect("cart.jsp");
 									}
