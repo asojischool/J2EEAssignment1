@@ -60,7 +60,7 @@
 		for (Tour tour : tours) {
 			String name = tour.getTour_name();
 			int id = tour.getTour_id();
-			int price = tour.getPrice();
+			double price = tour.getPrice();
 			int slots = tour.getAvailableSlots();
 			/* int categoryID = tour.getCategoryID(); */
 			String briefDescription = tour.getBriefDescription();
