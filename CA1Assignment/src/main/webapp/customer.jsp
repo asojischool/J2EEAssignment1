@@ -14,12 +14,12 @@
 </head>
 <body>
 	<%@page import="servlets.allUser"%>
-	<%@page import="models.UserService"%>
+	<%@page import="models.AdminService"%>
 	<%@page import="models.User"%>
 	
 	<%
-		UserService userService = new UserService();
-		String userStr = userService.allUser();
+		AdminService adminService = new AdminService();
+		String userStr = adminService.allUser();
 	%>
 	
 	<%@include file="navbarAdmin.jsp"%>

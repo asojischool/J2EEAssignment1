@@ -14,7 +14,7 @@ import models.AdminService;
 /**
  * Servlet implementation class custUpdate
  */
-@WebServlet("/custUpdate")
+@WebServlet("/updateUser")
 public class updateUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

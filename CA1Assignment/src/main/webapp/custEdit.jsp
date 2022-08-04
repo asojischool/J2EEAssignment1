@@ -32,6 +32,11 @@
 		String email = request.getParameter("email");
 	%>
 	
+	<script>
+		strRole = <%=role%>;
+    	document.getElementById("role").value = strRole;
+	</script>
+	
 	<div>
 		<h2 style="text-align: center;" class="text-info">Edit Customer</h2>
 	</div>
@@ -56,8 +61,28 @@
 				</tr>
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Role:</td>
-					<td class="box shadow bg-white p-4"><input type="text"
-						value="<%=role%>" name="role"></td>
+					<td class="box shadow bg-white p-4">
+						<select id="role" name="role">
+						 <%
+						 	if(role.equals("admin")) {
+						 %>
+						 <option value="admin" selected>Admin</option>
+						 <option value="member">Member</option>
+						 <%
+							}
+						 %>
+						 <%
+							if(role.equals("member")) {
+						%>
+						 <option value="member" selected>Member</option>
+						 <option value="admin">Admin</option>
+						 <%
+							}
+						 %>
+   						<!--  <option value="admin">Admin</option>
+   						 <option value="member">Member</option> -->
+  						</select>
+					</td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Email</td>
