@@ -70,7 +70,6 @@
 					</tbody>
 				</table>
 				<h4>CREDIT CARD PAYMENT DETAILS</h4>
-				hello
 				
 			</div>
 		</div>
