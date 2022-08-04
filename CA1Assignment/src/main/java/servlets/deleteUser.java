@@ -36,7 +36,7 @@ public class deleteUser extends HttpServlet {
 		String idStr = request.getParameter("id");
 		int id = Integer.parseInt(idStr);
 		AdminService adminService = new AdminService();
-		int numRowsAffected = AdminService.deleteUser(id);
+		int numRowsAffected = adminService.deleteUser(id);
 		
 		if(numRowsAffected > 0) {
 			request.setAttribute("successMsg", "User Successsfully Deleted");
