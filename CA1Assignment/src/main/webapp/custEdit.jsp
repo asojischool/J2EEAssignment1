@@ -38,7 +38,7 @@
 	<div class="container">
 		<table
 			class="row d-flex justify-content-center height height align-content-center">
-			<form action="custUpdate" method="post">
+			<form action="updateUser" method="post">
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">User ID:</td>
 					<td class="box shadow bg-white p-4"><input type="number"

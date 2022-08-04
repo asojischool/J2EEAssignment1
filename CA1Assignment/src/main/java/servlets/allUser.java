@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import models.UserService;
+import models.AdminService;
 
 /**
  * Servlet implementation class allUser
@@ -32,8 +32,8 @@ public class allUser extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		UserService userService = new UserService();
-		String users = userService.allUser();
+		AdminService adminService = new AdminService();
+		String users = adminService.allUser();
 		HttpSession session = request.getSession();
 		
 		session.setAttribute("userStr", users);

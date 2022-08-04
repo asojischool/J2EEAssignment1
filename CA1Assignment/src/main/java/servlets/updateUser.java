@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.UserService;
+import models.AdminService;
 
 /**
  * Servlet implementation class custUpdate
  */
 @WebServlet("/custUpdate")
-public class custUpdate extends HttpServlet {
+public class updateUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public custUpdate() {
+    public updateUser() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,8 +47,8 @@ public class custUpdate extends HttpServlet {
 			return;
 		}
 		
-		UserService userService = new UserService();
-		int numRowsAffected = userService.custUpdate(id, username, password, role, email);
+		AdminService adminService = new AdminService();
+		int numRowsAffected = adminService.updateUser(id, username, password, role, email);
 		
 		if(numRowsAffected > 0) {
 			request.setAttribute("successMsg", "User Successsfully Updated");
