@@ -1,42 +1,33 @@
 package models;
 
 public class Tour {
-	private int tour_id;
-	private String tour_name;
+	private String tourName;
 	private String briefDescription;
 	private String fullDescription;
+	private String startDate;
+	private String endDate;
+	private String location;
 	private double price;
 	private int availableSlots;
+	private int toursBought;
 	private int categoryID;
 	private String image;
-	
-	public Tour(int tour_id, String tour_name, String briefDescription, String fullDescription, double price,
-			int availableSlots, int categoryID, String image) {
-		super();
-		this.tour_id = tour_id;
-		this.tour_name = tour_name;
-		this.briefDescription = briefDescription;
-		this.fullDescription = fullDescription;
-		this.price = price;
-		this.availableSlots = availableSlots;
-		this.categoryID = categoryID;
-		this.image = image;
+	private int tourID;
+
+	public int getTourID() {
+		return tourID;
 	}
 
-	public int getTour_id() {
-		return tour_id;
+	public void setTourID(int tourID) {
+		this.tourID = tourID;
 	}
 
-	public void setTour_id(int tour_id) {
-		this.tour_id = tour_id;
+	public String getTourName() {
+		return tourName;
 	}
 
-	public String getTour_name() {
-		return tour_name;
-	}
-
-	public void setTour_name(String tour_name) {
-		this.tour_name = tour_name;
+	public void setTourName(String tourName) {
+		this.tourName = tourName;
 	}
 
 	public String getBriefDescription() {
@@ -55,6 +46,30 @@ public class Tour {
 		this.fullDescription = fullDescription;
 	}
 
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
 	public double getPrice() {
 		return price;
 	}
@@ -69,6 +84,14 @@ public class Tour {
 
 	public void setAvailableSlots(int availableSlots) {
 		this.availableSlots = availableSlots;
+	}
+
+	public int getToursBought() {
+		return toursBought;
+	}
+
+	public void setToursBought(int toursBought) {
+		this.toursBought = toursBought;
 	}
 
 	public int getCategoryID() {
@@ -86,7 +109,4 @@ public class Tour {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
-	
-	
 }
