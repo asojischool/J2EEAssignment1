@@ -171,6 +171,7 @@ public class UserService {
 				String dbPassword = rs.getString("password");
 				String dbRole = rs.getString("role");
 				String dbEmail = rs.getString("email");
+				String dbArea = rs.getString("residential_area");
 
 				User user = new User();
 				user.setUser_id(dbID);
@@ -178,13 +179,14 @@ public class UserService {
 				user.setPassword(dbPassword);
 				user.setRole(dbRole);
 				user.setEmail(dbEmail);
+				user.setResidentialArea(dbArea);
 
 				users.add(user);
 				userStr += "<tr><td class=\"box shadow bg-white p-4\">" + dbID
 						+ "</td><td class=\"box shadow bg-white p-4\">" + dbUsername
 						+ "</td><td class=\"box shadow bg-white p-4\"><form action=\"custEdit.jsp?id=" + dbID
 						+ "&username=" + dbUsername + "&password=" + dbPassword + "&role=" + dbRole + "&email="
-						+ dbEmail + "\" method=\"post\"><input type=\"submit\" value=\"edit\"></form></td></tr>";
+						+ dbEmail + "&area=" + dbArea + "\" method=\"post\"><input type=\"submit\" value=\"edit\"></form></td></tr>";
 			}
 			userStr += "</table>";
 			conn.close();

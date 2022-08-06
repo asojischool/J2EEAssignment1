@@ -30,12 +30,10 @@
 		String role = request.getParameter("role");
 		
 		String email = request.getParameter("email");
+		
+		String area = request.getParameter("area");
 	%>
 	
-	<script>
-		strRole = <%=role%>;
-    	document.getElementById("role").value = strRole;
-	</script>
 	
 	<div>
 		<h2 style="text-align: center;" class="text-info">Edit Customer</h2>
@@ -79,8 +77,6 @@
 						 <%
 							}
 						 %>
-   						<!--  <option value="admin">Admin</option>
-   						 <option value="member">Member</option> -->
   						</select>
 					</td>
 				</tr>
@@ -88,6 +84,11 @@
 					<td class="box shadow bg-white p-4">Email</td>
 					<td class="box shadow bg-white p-4"><input type="text"
 						value="<%=email%>" name="email"></td>
+				</tr>
+				<tr class="col-md-5">
+					<td class="box shadow bg-white p-4">Residential Area</td>
+					<td class="box shadow bg-white p-4"><input type="text"
+						value="<%=area%>" name="area"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="d-grid gap-2 mb-4"><input
