@@ -25,7 +25,8 @@ body {
 			<a class="navbar-brand" href="">Admin</a>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav me-auto">
-					<li class="nav-item"><a class="nav-link" href="admin.jsp">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="admin.jsp">Tours</a></li>
+					<li class="nav-item"><a class="nav-link" href="customer.jsp">Users</a></li>
 				</ul>
 				<%
 				if (session.getAttribute("sessUser") != null && (Boolean) session.getAttribute("authenticated") == true) {

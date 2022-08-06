@@ -43,6 +43,14 @@
 	%>
 	
 	<div class="container">
+		<form action="searchUser">
+			 <input type="text" name="search" placeholder="Search">
+			 <input type="submit" name="submit" value="Search By Name">
+			<input type="submit" name="submit" value="Search By Residential Area">
+		</form>
+	</div>
+	
+	<div class="container">
 		<%
 		out.print(userStr);
 		%>
