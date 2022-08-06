@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.UserService;
+import models.AdminService;
 
 /**
  * Servlet implementation class deleteUser
@@ -35,8 +35,8 @@ public class deleteUser extends HttpServlet {
 		
 		String idStr = request.getParameter("id");
 		int id = Integer.parseInt(idStr);
-		UserService userService = new UserService();
-		int numRowsAffected = userService.deleteUser(id);
+		AdminService adminService = new AdminService();
+		int numRowsAffected = adminService.deleteUser(id);
 		
 		if(numRowsAffected > 0) {
 			request.setAttribute("successMsg", "User Successsfully Deleted");

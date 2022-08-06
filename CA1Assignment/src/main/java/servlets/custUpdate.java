@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.UserService;
+import models.AdminService;
 
 /**
  * Servlet implementation class custUpdate
@@ -47,8 +47,8 @@ public class custUpdate extends HttpServlet {
 			return;
 		}
 		
-		UserService userService = new UserService();
-		int numRowsAffected = userService.custUpdate(id, username, password, role, email);
+		AdminService adminService = new AdminService();
+		int numRowsAffected = adminService.updateUser(id, username, password, role, email);
 		
 		if(numRowsAffected > 0) {
 			request.setAttribute("successMsg", "User Successsfully Updated");
