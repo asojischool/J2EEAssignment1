@@ -42,7 +42,7 @@
 	
 	<div class="container">
 		<table class="row d-flex justify-content-center height height align-content-center">
-			<form action="registerUser" method="post">
+			<form action="registerCust" method="post">
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Username: </td>
 					<td class="box shadow bg-white p-4"><input type="text" name="username" value="<%=tempUsername %>"></td>
