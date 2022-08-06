@@ -21,6 +21,7 @@
 	String tempUsername = (String) request.getAttribute("tempUsername");
 	String tempPassword = (String) request.getAttribute("tempPassword");
 	String tempEmail = (String) request.getAttribute("tempEmail");
+	String tempArea = (String) request.getAttribute("tempArea");
 	if (tempUsername == null){
 		tempUsername = "";
 	} 
@@ -30,6 +31,9 @@
 	if (tempEmail == null){
 		tempEmail = "";
 	} 
+	if (tempArea == null){
+		tempArea = "";
+	}
 	%>
     <%@include file="navbar.jsp"%>
 
@@ -59,6 +63,11 @@
 							<input class="form-control rounded-0" type="text" name="email"
 								placeholder="email" id="floatingEmail" value="<%=tempEmail%>"> <label
 								for="floatingEmail">Email</label>
+						</div>
+						<div class="form-floating mb-4">
+							<input class="form-control rounded-0" type="text" name="area"
+								placeholder="Residential Area" id="floatingArea" value="<%=tempArea%>"> <label
+								for="floatingArea">Residential Area</label>
 						</div>
 						<div class="form-floating mb-4">
 							<input class="form-control rounded-0" type="password" value="<%=tempPassword%>"

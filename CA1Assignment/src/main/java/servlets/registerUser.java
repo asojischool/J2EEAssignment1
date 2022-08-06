@@ -37,19 +37,23 @@ public class registerUser extends HttpServlet {
 		String password = request.getParameter("password");
 		String role = "member";
 		String email = request.getParameter("email");
+		String area = request.getParameter("area");
 		
-		if (username.equals("") || password.equals("") || email.equals("") || username == null || password == null || email == null) {
+		if (username.equals("") || password.equals("") || email.equals("") || area.equals("") || username == null || password == null || email == null || area == null) {
 			request.setAttribute("err", "Please fill in all fields");
 			request.setAttribute("tempUsername", username);
 			request.setAttribute("tempPassword", password);
 			request.setAttribute("tempEmail", email);
+			request.setAttribute("tempArea", area);
 			RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
 			rd.forward(request, response);
 			return;
 		}
 		
+		String areaStr = area.toLowerCase();
+		
 		UserService userService = new UserService();
-		int numRowsAffected = userService.registerUser(username, password, role, email);
+		int numRowsAffected = userService.registerUser(username, password, role, email, areaStr);
 		
 		if(numRowsAffected > 0) {
 			request.setAttribute("successMsg", "Register Successful");
