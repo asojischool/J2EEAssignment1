@@ -46,6 +46,10 @@
 		<%
 		out.print(userStr);
 		%>
+		<form action="custInsert.jsp">
+			<input class="btn btn-primary fs-5" type="submit"
+				value="Create New User">
+		</form>
 	</div>
 </body>
 </html>
