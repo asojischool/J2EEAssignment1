@@ -6,14 +6,14 @@ public class User {
 	private String password;
 	private String role;
 	private String email;
-	
-	public User(int user_id, String username, String password, String role, String email) {
-		super();
-		this.user_id = user_id;
-		this.username = username;
-		this.password = password;
-		this.role = role;
-		this.email = email;
+	private String residentialArea;
+
+	public String getResidentialArea() {
+		return residentialArea;
+	}
+
+	public void setResidentialArea(String location) {
+		this.residentialArea = location;
 	}
 
 	public int getUser_id() {
