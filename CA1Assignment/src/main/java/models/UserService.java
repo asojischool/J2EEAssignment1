@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class UserService {
 	public User verifyUser(String username, String password) {
 		
-		User user = null;
+		User user = new User();
 		Connection conn = null;
 		
 		try {
@@ -109,7 +109,7 @@ public class UserService {
 	
 	public User getUserByID (int userID) {
 		
-		User loggedInUser = null;
+		User loggedInUser = new User();
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

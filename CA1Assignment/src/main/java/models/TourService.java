@@ -21,8 +21,8 @@ public class TourService {
 			// check resultset
 
 			while (rs.next()) {
-				int dbID = rs.getInt("tourID");
-				String dbName = rs.getString("tourName");
+				int dbID = rs.getInt("tour_id");
+				String dbName = rs.getString("tour_name");
 				String dbBriefDescription = rs.getString("brief_description");
 				String dbFullDescription = rs.getString("detail_description");
 				String dbStartDate = rs.getString("start_date");
@@ -77,8 +77,8 @@ public class TourService {
 			// check resultset
 
 			while (rs.next()) {
-				int dbID = rs.getInt("tourID");
-				String dbName = rs.getString("tourName");
+				int dbID = rs.getInt("tour_id");
+				String dbName = rs.getString("tour_name");
 				String dbBriefDescription = rs.getString("brief_description");
 				String dbFullDescription = rs.getString("detail_description");
 				String dbStartDate = rs.getString("start_date");
@@ -112,7 +112,7 @@ public class TourService {
 		} catch (Exception e) {
 			System.out.println("Error :" + e);
 		}
-
+		
 		return tours;
 	}
 	
@@ -125,7 +125,7 @@ public class TourService {
 			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
 			Connection conn = DriverManager.getConnection(connURL);
 
-			String sqlStr = "SELECT * FROM tour WHERE tourID=?";
+			String sqlStr = "SELECT * FROM tour WHERE tour_id=?";
 			PreparedStatement ps = conn.prepareStatement(sqlStr);
 			ps.setInt(1, tourID);
 			ResultSet rs = ps.executeQuery();
@@ -134,8 +134,8 @@ public class TourService {
 
 			if (rs.next()) {
 				
-				int dbID = rs.getInt("tourID");
-				String dbName = rs.getString("tourName");
+				int dbID = rs.getInt("tour_id");
+				String dbName = rs.getString("tour_name");
 				String dbBriefDescription = rs.getString("brief_description");
 				String dbFullDescription = rs.getString("detail_description");
 				String dbStartDate = rs.getString("start_date");
@@ -165,7 +165,6 @@ public class TourService {
 		} catch (Exception e) {
 			System.out.println("Error :" + e);
 		}
-
 		return detailedTour;
 	}
 }
