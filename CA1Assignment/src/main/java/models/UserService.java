@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class UserService {
 	public User verifyUser(String username, String password) {
 		
-		User user = null;
+		User user = new User();
 		Connection conn = null;
 		
 		try {
@@ -36,7 +36,11 @@ public class UserService {
 	        }
 	        
 	        if(username.equals(dbName) && password.equals(dbPassword)) {
-	        	user = new User(dbID, dbName, dbPassword, dbRole, dbEmail);
+	        	user.setUser_id(dbID);
+	        	user.setUsername(dbName);
+	        	user.setPassword(dbPassword);
+	        	user.setRole(dbRole);
+	        	user.setEmail(dbEmail);
 	        }
 		} catch (Exception e) {
 			System.out.println("Error :" + e);
@@ -101,7 +105,7 @@ public class UserService {
 	
 	public User getUserByID (int userID) {
 		
-		User loggedInUser = null;
+		User loggedInUser = new User();
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -126,7 +130,13 @@ public class UserService {
 	    	    dbPassword = rs.getString("password");
 	    	    dbRole = rs.getString("role");
 	    	    dbEmail = rs.getString("email");
-	    	    loggedInUser = new User(dbID, dbName, dbPassword, dbRole, dbEmail);
+	    	    
+	    	    loggedInUser.setUser_id(dbID);
+	    	    loggedInUser.setUsername(dbName);
+	    	    loggedInUser.setPassword(dbPassword);
+	    	    loggedInUser.setRole(dbRole);
+	    	    loggedInUser.setEmail(dbEmail);
+	    	    
 	        }
 	        
 	        conn.close();
@@ -155,7 +165,15 @@ public class UserService {
 				String dbPassword = rs.getString("password");
 				String dbRole = rs.getString("role");
 				String dbEmail = rs.getString("email");
-				users.add(new User(dbID, dbUsername, dbPassword, dbRole, dbEmail));
+				
+				User user = new User();
+				user.setUser_id(dbID);
+	        	user.setUsername(dbUsername);
+	        	user.setPassword(dbPassword);
+	        	user.setRole(dbRole);
+	        	user.setEmail(dbEmail);
+				
+				users.add(user);
 				userStr += "<tr><td class=\"box shadow bg-white p-4\">" + dbID + "</td><td class=\"box shadow bg-white p-4\">" + dbUsername +
 						"</td><td class=\"box shadow bg-white p-4\"><form action=\"custEdit.jsp?id=" + 
 						dbID + "&username=" + dbUsername + "&password=" + dbPassword + "&role=" + dbRole + 
