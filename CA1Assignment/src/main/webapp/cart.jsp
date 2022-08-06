@@ -89,7 +89,7 @@ body {
 								totalCost += cartItem.getQuantity() * tour.getPrice();
 							%>
 							<tr>
-								<td><%=tour.getTour_name()%></td>
+								<td><%=tour.getTourName()%></td>
 								<td>$<%=String.format("%.2f", tour.getPrice())%></td>
 								<td>
 									<div class="form-group d-flex">

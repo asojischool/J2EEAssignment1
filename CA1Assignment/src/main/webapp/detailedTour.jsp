@@ -49,26 +49,31 @@ img {
 </head>
 <body>
 
+	<%! int tourID = 0;%>
+
 	<%
-	
 	String tempTourID = request.getParameter("tourID");
 	if (tempTourID == null || tempTourID == "") {
 		response.sendRedirect("home.jsp");
 		return;
 	}
 	
-	int tourID = Integer.parseInt(tempTourID);
-	
-	TourService tourService = new TourService();
-	
-	Tour detailedTour = tourService.getDetailedTour(tourID);
-	if(detailedTour == null) {
+	try {
+		 tourID = Integer.parseInt(tempTourID);
+	} catch (NumberFormatException e) {
 		response.sendRedirect("home.jsp");
 		return;
 	}
-	
-	CategoryService categoryService = new CategoryService();
 
+	TourService tourService = new TourService();
+
+	Tour detailedTour = tourService.getDetailedTour(tourID);
+	if (detailedTour == null) {
+		response.sendRedirect("home.jsp");
+		return;
+	}
+
+	CategoryService categoryService = new CategoryService();
 	%>
 
 	<%@include file="navbar.jsp"%>
@@ -81,7 +86,7 @@ img {
 
 		<div class="container mt-5">
 			<div>
-				<h1 class="tourHeader text-warning text-center"><%=detailedTour.getTour_name()%></h1>
+				<h1 class="tourHeader text-warning text-center"><%=detailedTour.getTourName()%></h1>
 			</div>
 			<div class="row">
 				<div class="col-8">
@@ -89,15 +94,21 @@ img {
 						<div class="">
 							<div class="fs-6">
 								<i class="bi bi-tags fa-3x align-middle text-danger"></i>
-								<p class="align-middle d-inline fw-bold iconText">Category: <%=categoryService.getCategoryName(detailedTour.getCategoryID())%></p>
+								<p class="align-middle d-inline fw-bold iconText">
+									Category:
+									<%=categoryService.getCategoryName(detailedTour.getCategoryID())%></p>
 							</div>
 							<div class="fs-6">
 								<i class="bi bi-person fa-3x align-middle mr-2 text-danger"></i>
-								<p class="align-middle d-inline fw-bold iconText">Available Slots: <%=detailedTour.getAvailableSlots() %></p>
+								<p class="align-middle d-inline fw-bold iconText">
+									Available Slots:
+									<%=detailedTour.getAvailableSlots()%></p>
 							</div>
 							<div class="fs-6">
 								<i class="bi bi-currency-dollar fa-3x align-middle text-danger"></i>
-								<p class="align-middle d-inline fw-bold iconText">Price: <%= String.format("%.2f", detailedTour.getPrice()) %></p>
+								<p class="align-middle d-inline fw-bold iconText">
+									Price:
+									<%=String.format("%.2f", detailedTour.getPrice())%></p>
 							</div>
 							<br>
 						</div>
@@ -110,15 +121,16 @@ img {
 					<div class="mt-3">
 						<h4>Book this Tour</h4>
 						<form action="addToCart" method="post">
-							<label>Quantity:</label>
-							<input type="hidden" name="tourID" value="<%= detailedTour.getTour_id() %>">
-							<input type="number" name="quantity" min=1 max=10 value=1><br><br>
-							<input class="btn btn-success" type="submit" value="Add to Cart">
+							<label>Quantity:</label> <input type="hidden" name="tourID"
+								value="<%=detailedTour.getTourID()%>"> <input
+								type="number" name="quantity" min=1 max=10 value=1><br>
+							<br> <input class="btn btn-success" type="submit"
+								value="Add to Cart">
 						</form>
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 
 	</main>

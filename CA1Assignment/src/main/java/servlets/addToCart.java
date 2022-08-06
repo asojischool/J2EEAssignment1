@@ -48,8 +48,23 @@ public class addToCart extends HttpServlet {
 			return;
 		}
 		
-		Integer tourID = Integer.parseInt((String) request.getParameter("tourID"));
-		Integer quantity = Integer.parseInt((String) request.getParameter("quantity"));
+		int tourID = 0;
+		int quantity = 0;
+		
+		try {
+			tourID = Integer.parseInt((String) request.getParameter("tourID"));
+		} catch (NumberFormatException e) {
+			response.sendRedirect("cart.jsp");
+			return;
+		}
+		
+		try {
+			quantity = Integer.parseInt((String) request.getParameter("quantity"));
+		} catch (NumberFormatException e) {
+			response.sendRedirect("cart.jsp");
+			return;
+		}
+		
 		Boolean dup = false;
 		int cartIdx = 0;
 		

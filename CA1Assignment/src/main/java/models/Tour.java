@@ -1,6 +1,7 @@
 package models;
 
 public class Tour {
+	private int tourID;
 	private String tourName;
 	private String briefDescription;
 	private String fullDescription;
@@ -12,8 +13,7 @@ public class Tour {
 	private int toursBought;
 	private int categoryID;
 	private String image;
-	private int tourID;
-
+	
 	public int getTourID() {
 		return tourID;
 	}

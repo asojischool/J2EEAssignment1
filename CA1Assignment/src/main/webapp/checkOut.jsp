@@ -38,7 +38,7 @@
 		<div class="container">
 			<h1 class="mt-5">CHECKOUT</h1>
 			<div class="container mt-4 border rounded">
-				<h4>DELIVERY DETAILS</h4>
+				<%-- <h4>DELIVERY DETAILS</h4>
 				<table class="table align-middle">
 					<thead>
 						<tr>
@@ -56,7 +56,7 @@
 							totalCost += cartItem.getQuantity() * tour.getPrice();
 						%>
 						<tr>
-							<td><%=tour.getTour_name()%></td>
+							<td><%=tour.gettourName()%></td>
 							<td><%=tour.getPrice()%></td>
 							<td><%=cartItem.getQuantity()%></td>
 							<td><%=cartItem.getQuantity() * tour.getPrice()%></td>
@@ -68,9 +68,11 @@
 							<td colspan="4"><strong>Total Cost: $</strong><%= totalCost %></td>
 						</tr>
 					</tbody>
-				</table>
+				</table> --%>
 				<h4>CREDIT CARD PAYMENT DETAILS</h4>
-				hello
+				<div class="text-center m-4">
+					<a href="checkOut" class="btn btn-sm btn-success fs-5 w-100">test</a>
+				</div>
 				
 			</div>
 		</div>

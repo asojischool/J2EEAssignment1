@@ -19,6 +19,8 @@
 	crossorigin="anonymous" />
 </head>
 <body>
+	<%! int categoryID = 0; %>
+
 	<%
 	
 	String tempCategoryID = request.getParameter("categoryID");
@@ -27,7 +29,11 @@
 		return;
 	}
 	
-	int categoryID = Integer.parseInt(tempCategoryID);
+	try {
+		categoryID = Integer.parseInt(tempCategoryID);
+	} catch (NumberFormatException e) {
+		categoryID = -1;
+	}
 	
 	TourService tourService = new TourService();
 	CategoryService categoryService = new CategoryService();
@@ -37,7 +43,16 @@
 	
 	if(tours.isEmpty() || tours == null) {
 	%>
-		<h1>No Tours</h1>
+		<%@include file="navbar.jsp"%>
+		<div class="py-5 text-center container">
+			<div class="row py-lg-5">
+				<div class="col-lg-6 col-md-8 mx-auto">
+					<h1>
+						No Tours in the Category
+					</h1><br>
+				</div>
+			</div>
+		</div>
 	<%
 	} else {
 	%>
@@ -45,7 +60,7 @@
 	<main>
 	<%@include file="navbar.jsp"%>
 
-		<section class="py-5 text-center container">
+		<div class="py-5 text-center container">
 			<div class="row py-lg-5">
 				<div class="col-lg-6 col-md-8 mx-auto">
 					<h1 class="fw-bold"><%=category.getCategoryName()%>
@@ -54,12 +69,12 @@
 					<p class="lead text-muted fw-normal"><%=category.getCategoryDescription()%></p>
 				</div>
 			</div>
-		</section>
+		</div>
 
 	<%
 		for (Tour tour : tours) {
-			String name = tour.getTour_name();
-			int id = tour.getTour_id();
+			String name = tour.getTourName();
+			int id = tour.getTourID();
 			double price = tour.getPrice();
 			int slots = tour.getAvailableSlots();
 			/* int categoryID = tour.getCategoryID(); */
@@ -88,8 +103,6 @@
 	}
 	%>
 	</main>
-
-
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
