@@ -1,5 +1,8 @@
 package models;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 public class Tour {
 	private int tourID;
 	private String tourName;
@@ -108,5 +111,23 @@ public class Tour {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+	
+	public int getDuration() {
+		long daysDiff = 0;
+		int days = 0;
+		try {
+		    LocalDate dateBefore = LocalDate.parse(this.getStartDate());
+		    LocalDate dateAfter = LocalDate.parse(this.getEndDate());
+
+		    // Approach 1
+		    daysDiff = ChronoUnit.DAYS.between(dateBefore, dateAfter);
+		    days = (int)daysDiff;
+		    
+		}catch(Exception e){
+		    e.printStackTrace();
+		}
+		
+		return days;
 	}
 }

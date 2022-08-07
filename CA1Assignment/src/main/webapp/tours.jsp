@@ -63,7 +63,7 @@
 		<div class="py-5 text-center container">
 			<div class="row py-lg-5">
 				<div class="col-lg-6 col-md-8 mx-auto">
-					<h1 class="fw-bold"><%=category.getCategoryName()%>
+					<h1 class="fw-bold"><%=categoryService.capitalizeWord(category.getCategoryName())%>
 						Tours
 					</h1><br>
 					<p class="lead text-muted fw-normal"><%=category.getCategoryDescription()%></p>
@@ -89,8 +89,10 @@
 				</div>
 				<div class="col-6">
 					<h3><%=name%></h3><br>
+					<p>Location: <%=tourService.capitalizeWord(tour.getLocation())%></p>
 					<p>Price: <%=String.format("%.2f", price)%></p>
-					<p>Slots: <%=slots%></p>
+					<p>Available Slots: <%=slots%></p>
+					<p>Duration: <%=tour.getDuration()%> days</p>
 					<p><%= briefDescription %></p>
 					<a class="btn btn-success btn-lg"
 						href="detailedTour.jsp?tourID=<%=id%>" role="button">Read More</a>

@@ -76,6 +76,13 @@ public class addToCart extends HttpServlet {
 			return;
 		}
 		
+		if(quantity > tourService.getDetailedTour(tourID).getAvailableSlots() || quantity < 1) {
+			request.setAttribute("errMsg", "Invalid Amount of Tour booked");
+			RequestDispatcher rd = request.getRequestDispatcher("detailedTour.jsp?tourID=" + tourID);
+			rd.forward(request, response);
+			return;
+		}
+		
 		// CartItem cartItem = new CartItem(tourID, quantity);
 		if (session.getAttribute("cart") == null) {
 			ArrayList<CartItem> cart = new ArrayList<CartItem>();
@@ -93,15 +100,28 @@ public class addToCart extends HttpServlet {
 			}
 			if(dup) {
 				CartItem cartItem = cart.get(cartIdx);
+				
+				if((cart.get(cartIdx).getQuantity() + quantity)> tourService.getDetailedTour(tourID).getAvailableSlots()) {
+					request.setAttribute("errMsg", "Invalid Amount of Tour booked");
+					RequestDispatcher rd = request.getRequestDispatcher("detailedTour.jsp?tourID=" + tourID);
+					rd.forward(request, response);
+					return;
+				}
+				
 				cartItem.setQuantity(cart.get(cartIdx).getQuantity() + quantity);
 				cart.set(cartIdx, cartItem);
 				session.setAttribute("cart", cart);
+				request.setAttribute("successMsg", "Successfully Added To Cart");
 			} else {
 				cart.add(new CartItem(tourID, quantity));
 				session.setAttribute("cart", cart);
+				request.setAttribute("successMsg", "Successfully Added To Cart");
 			}
 		}
-		response.sendRedirect("detailedTour.jsp?tourID=" + tourID);
+//		response.sendRedirect("detailedTour.jsp?tourID=" + tourID);
+		RequestDispatcher rd = request.getRequestDispatcher("detailedTour.jsp?tourID=" + tourID);
+		rd.forward(request, response);
+		return;
 		
 	}
 

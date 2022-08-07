@@ -4,10 +4,17 @@ public class Order {
 	private String tourName;
 	private String userName;
 	private int tourID;
+	private int userID;
 	private int quantity;
 	private double price;
 	private String date;
 	
+	public int getUserID() {
+		return userID;
+	}
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
 	public String getUserName() {
 		return userName;
 	}

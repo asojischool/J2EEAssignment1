@@ -49,7 +49,7 @@ img {
 </head>
 <body>
 
-	<%! int tourID = 0;%>
+	<%!int tourID = 0;%>
 
 	<%
 	String tempTourID = request.getParameter("tourID");
@@ -57,9 +57,9 @@ img {
 		response.sendRedirect("home.jsp");
 		return;
 	}
-	
+
 	try {
-		 tourID = Integer.parseInt(tempTourID);
+		tourID = Integer.parseInt(tempTourID);
 	} catch (NumberFormatException e) {
 		response.sendRedirect("home.jsp");
 		return;
@@ -74,6 +74,31 @@ img {
 	}
 
 	CategoryService categoryService = new CategoryService();
+
+	String success = (String) request.getAttribute("successMsg");
+	String err = (String) request.getAttribute("errMsg");
+	if (success != null) {
+	%>
+	<div
+		class="alert alert-success alert-dismissible fade show position-absolute"
+		role="alert">
+		<%=success%>
+		<button type="button" class="btn-close" data-bs-dismiss="alert"
+			aria-label="Close"></button>
+	</div>
+	<%
+	}
+	if (err != null) {
+	%>
+	<div
+		class="alert alert-danger alert-dismissible fade show position-absolute"
+		role="alert">
+		<%=err%>
+		<button type="button" class="btn-close" data-bs-dismiss="alert"
+			aria-label="Close"></button>
+	</div>
+	<%
+	}
 	%>
 
 	<%@include file="navbar.jsp"%>
@@ -96,7 +121,7 @@ img {
 								<i class="bi bi-tags fa-3x align-middle text-danger"></i>
 								<p class="align-middle d-inline fw-bold iconText">
 									Category:
-									<%=categoryService.getCategoryName(detailedTour.getCategoryID())%></p>
+									<%=categoryService.capitalizeWord(categoryService.getCategoryName(detailedTour.getCategoryID()))%></p>
 							</div>
 							<div class="fs-6">
 								<i class="bi bi-person fa-3x align-middle mr-2 text-danger"></i>
@@ -109,6 +134,18 @@ img {
 								<p class="align-middle d-inline fw-bold iconText">
 									Price:
 									<%=String.format("%.2f", detailedTour.getPrice())%></p>
+							</div>
+							<div class="fs-6">
+								<i class="bi bi-geo-alt fa-3x align-middle text-danger"></i>
+								<p class="align-middle d-inline fw-bold iconText">
+									Location:
+									<%=tourService.capitalizeWord(detailedTour.getLocation())%></p>
+							</div>
+							<div class="fs-6">
+								<i class="bi bi-calendar-week fa-3x align-middle text-danger"></i>
+								<p class="align-middle d-inline fw-bold iconText">
+									Duration:
+									<%=detailedTour.getDuration()%> days</p>
 							</div>
 							<br>
 						</div>
@@ -123,7 +160,7 @@ img {
 						<form action="addToCart" method="post">
 							<label>Quantity:</label> <input type="hidden" name="tourID"
 								value="<%=detailedTour.getTourID()%>"> <input
-								type="number" name="quantity" min=1 max=10 value=1><br>
+								type="number" name="quantity" min=1 max=<%=detailedTour.getAvailableSlots() %> value=1><br>
 							<br> <input class="btn btn-success" type="submit"
 								value="Add to Cart">
 						</form>

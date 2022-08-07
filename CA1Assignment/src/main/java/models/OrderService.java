@@ -47,4 +47,33 @@ public class OrderService {
 		
 		return orders;
 	}
+	
+	public int insertOrder(Order order) {
+
+		int rowsAffected = 0;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
+			Connection conn = DriverManager.getConnection(connURL);
+
+			
+			String sqlStr = "INSERT INTO orders (tour_id, user_id, tour_name, user_name, price, quantity) VALUES (?, ?, ?, ?, ?, ?)";
+			PreparedStatement ps = conn.prepareStatement(sqlStr);
+			ps.setInt(1, order.getTourID());
+			ps.setInt(2, order.getUserID());
+			ps.setString(3, order.getTourName());
+			ps.setString(4, order.getUserName());
+			ps.setDouble(5, order.getPrice());
+			ps.setInt(6, order.getQuantity());
+			rowsAffected = ps.executeUpdate();
+
+			conn.close();
+
+		} catch (Exception e) {
+			System.out.println("Error :" + e);
+		}
+		
+		return rowsAffected;
+	}
 }

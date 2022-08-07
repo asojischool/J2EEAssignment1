@@ -51,15 +51,15 @@ body {
 	double totalCost = 0;
 	double rates = 1;
 	String currency = "SGD";
-	
-	if(session.getAttribute("rates") != null) {
+
+	if (session.getAttribute("rates") != null) {
 		try {
 			rates = (Double) (session.getAttribute("rates"));
 		} catch (Exception e) {
 		}
 	}
-	
-	if(session.getAttribute("currency") != null) {
+
+	if (session.getAttribute("currency") != null) {
 		try {
 			currency = (String) (session.getAttribute("currency"));
 		} catch (Exception e) {
@@ -108,7 +108,7 @@ body {
 							%>
 							<tr>
 								<td><%=tour.getTourName()%></td>
-								<td><%=currency + String.format("%.2f", tour.getPrice()* rates)%></td>
+								<td><%=currency + String.format("%.2f", tour.getPrice() * rates)%></td>
 								<td>
 									<div class="form-group d-flex">
 										<a class="btn btn-primary btn-incre"
@@ -133,22 +133,22 @@ body {
 						</tbody>
 					</table>
 					<div class="m-4">
-						Currency: <form action="currencyConversion" name="form1" method="post">
+						Currency:
+						<form action="currencyConversion" name="form1" method="post">
 							<select name="selectCurrency">
 								<option value="SGD">SGD</option>
 								<option value="USD">USD</option>
 								<option value="EUR">EUR</option>
 								<option value="GBP">GBP</option>
-								<option value="JPY">JPY</option>
 								<option value="CAD">CAD</option>
-								<option value="CAD">AUD</option>
-								<option value="CAD">CHF</option>
-								<option value="BTC">BTC</option>
-							</select>
-							<input type="hidden" name="totalValue" value="<%= totalCost %>">
+								<option value="AUD">AUD</option>
+								<option value="CHF">CHF</option>
+								<option value="CNY">CNY</option>
+							</select> <input type="hidden" name="totalValue" value="<%=totalCost%>">
 							<input type="submit" name="submit" value="Change">
-						</form><br>
-							
+						</form>
+						<br>
+
 						<h5>
 							<strong>Total Cost (without GST): <%=currency + String.format("%.2f", totalCost * rates)%></strong>
 						</h5>
@@ -158,8 +158,11 @@ body {
 						</h3>
 					</div>
 					<div class="text-center m-4">
-						<a href="checkOut.jsp" class="btn btn-sm btn-success fs-5 w-100">Check
-							Out</a>
+						<form action="checkOut" name="checkOutform" method="post">
+							<input type="hidden" name="currency" value="<%= currency %>">
+							<input type="hidden" name="totalCost" value="<%= totalCost * 1.07 * rates %>">
+							<input type="submit" name="CheckOut" value="Check Out" class="btn btn-sm btn-success fs-5 w-100">
+						</form>
 					</div>
 				</div>
 			</div>
