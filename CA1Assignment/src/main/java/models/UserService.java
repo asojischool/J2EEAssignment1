@@ -83,18 +83,19 @@ public class UserService {
 		return numRowsAffected;
 	}
 	
-	public int updateUser(String username, String password, String email, int userID) {
+	public int updateUser(String username, String password, String email, int userID, String residentialArea) {
 		int numRowsAffected = 0;
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); 
 			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
 			Connection conn = DriverManager.getConnection(connURL);
-			String sqlStr = "UPDATE user SET username=?, password=?, email=? WHERE user_id=?";
+			String sqlStr = "UPDATE user SET username=?, password=?, email=?, residential_area=?, WHERE user_id=?";
 			PreparedStatement ps = conn.prepareStatement(sqlStr);
 			ps.setString(1, username);
 			ps.setString(2, password);
 			ps.setString(3, email);
 			ps.setInt(4, userID);
+			ps.setString(5, residentialArea);
 			numRowsAffected = ps.executeUpdate();
 //			if(numRowsAffected > 0) {
 				System.out.println(numRowsAffected);

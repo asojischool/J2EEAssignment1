@@ -89,6 +89,12 @@
 								value="<%=user.getEmail()%>"> <label
 								for="floatingPassword">Email</label>
 						</div>
+						<div class="form-floating mb-4">
+							<input class="form-control rounded-0" type="text" name="residentialArea"
+								placeholder="Residential Area" id="floatingEmail"
+								value="<%=user.getResidentialArea()%>"> <label
+								for="floatingPassword">Residential Area</label>
+						</div>
 						<div class="d-grid gap-2 mb-4">
 							<input class="btn btn-success fs-5" type="submit"
 								name="btnSubmit" value="Update">
