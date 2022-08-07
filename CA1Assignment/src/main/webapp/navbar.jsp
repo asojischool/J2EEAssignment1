@@ -31,8 +31,10 @@ body {
 				if (session.getAttribute("sessID") != null) {
 				%>
 				<ul class="navbar-nav ms-auto">
+					<li class="nav-item px-3"><a class="nav-link" href="cart.jsp"
+						type="button">Cart</a></li>
 					<li class="nav-item px-3"><a class="nav-link"
-						href="cart.jsp" type="button">Cart</a></li>
+						href="salesHistory.jsp" type="button">Sales History</a></li>
 					<li class="nav-item px-3"><a class="nav-link"
 						href="profile.jsp" type="button">Edit Profile</a></li>
 					<li class="nav-item px-3"><a class="nav-link text-white"><strong>Logged-In</strong></a></li>
@@ -55,7 +57,7 @@ body {
 			</div>
 		</div>
 	</nav>
-	
+
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
 		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 		crossorigin="anonymous"></script>

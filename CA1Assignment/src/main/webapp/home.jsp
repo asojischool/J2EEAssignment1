@@ -73,13 +73,11 @@ body {
 			<div class="text-center container">
 				<div class="row py-lg-5">
 					<div class="col-lg-6 col-md-8 mx-auto">
-						<h1 class="text-light fw-bolder">Singapore Tours</h1><br>
+						<h1 class="text-light fw-bolder">Tours</h1><br>
 						<p class="lead text-light fw-normal">Ready to experience the real
-							Singapore? Let's Go Tour Singapore is an award-winning tour
-							operator offering a wide range of unique tours. We got Bike
-							Tours, Food Tours, Boat Tours, Walking tours, Nature Tours,
-							Theatrical Tours and more. Make the most of each travel moment
-							and create some wonderful memories with us now!</p>
+							World? Let's Go Tour World is an award-winning tour
+							operator offering a wide range of unique tours. We got many tours that travel to many unique countries
+							Make the most of each travel moment and create some wonderful memories with us now!</p>
 					</div>
 				</div>
 			</div>
@@ -102,7 +100,7 @@ body {
 							<div class="card shadow-sm">
 								<img class="card-img-top" alt="attraction" src=<%=image%>>
 								<div class="card-body">
-									<h3><%=name%>
+									<h3><%=categoryService.capitalizeWord(name)%>
 										Tours
 									</h3>
 									<p class="card-text"><%=description%></p>
