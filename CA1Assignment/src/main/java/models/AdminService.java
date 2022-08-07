@@ -94,7 +94,7 @@ public class AdminService {
 			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
 			Connection conn = DriverManager.getConnection(connURL);
 			Statement stmt = conn.createStatement();
-			String sqlStr = "INSERT INTO tour (tour_name, brief_description, detail_description, start_date, end_date, location, price, available_slots, tour_bought, tour_category_id, image_location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sqlStr = "INSERT INTO tour (tour_name, brief_description, detail_description, start_date, end_date, location, price, available_slots, tours_bought, tour_category_id, image_location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = conn.prepareStatement(sqlStr);
 			ps.setString(1, name);
 			ps.setString(2, briefDescription);
