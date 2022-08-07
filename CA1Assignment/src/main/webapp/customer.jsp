@@ -43,6 +43,10 @@
 	%>
 	
 	<div class="container">
+		<h2 style="text-align:center;" class="text-info">Customer Info</h2>
+	</div>
+	
+	<div class="container">
 		<form action="searchUser">
 			 <input type="text" name="search" placeholder="Search">
 			 <input type="submit" name="submit" value="Search By Name">

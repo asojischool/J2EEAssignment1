@@ -62,8 +62,16 @@ body {
 
 	<%@include file="navbarAdmin.jsp"%>
 
-	<div>
+	<div class="container">
 		<h2 style="text-align:center;" class="text-info">Tour Info</h2>
+	</div>
+	
+	<div class="container">
+		<form action="searchTour">
+			 <input type="text" name="search" placeholder="Search">
+			 <input type="submit" name="submit" value="Search By Tour Name">
+			<input type="submit" name="submit" value="Search By Location">
+		</form>
 	</div>
 
 	<div class="container">

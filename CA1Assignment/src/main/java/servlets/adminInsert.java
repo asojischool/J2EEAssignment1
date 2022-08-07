@@ -36,18 +36,31 @@ public class adminInsert extends HttpServlet {
 		String name = request.getParameter("name");
 		String briefDescription = request.getParameter("briefDescription");
 		String fullDescription = request.getParameter("fullDescription");
+		String start = request.getParameter("start");
+		String end = request.getParameter("end");
+		String location = request.getParameter("location");
 		String priceStr = request.getParameter("price");
 		String slotsStr = request.getParameter("slots");
+		String boughtStr = request.getParameter("bought");
 		String catIDStr = request.getParameter("catID");
 		String image = request.getParameter("image");
 		
-		if (name.equals("") || briefDescription.equals("") || fullDescription.equals("") || priceStr.equals("") || slotsStr.equals("") || catIDStr.equals("") || image.equals("")|| name == null || briefDescription == null || fullDescription == null || priceStr == null || slotsStr == null || catIDStr == null || image == null) {
+		if (name.equals("") || briefDescription.equals("") || fullDescription.equals("") || 
+				start.equals("") || end.equals("") || location.equals("") || priceStr.equals("") || 
+				slotsStr.equals("") || boughtStr.equals("") || catIDStr.equals("") || image.equals("") || 
+				name == null || briefDescription == null || fullDescription == null || start == null ||
+				end == null || location == null || priceStr == null || slotsStr == null || boughtStr == null || 
+				catIDStr == null || image == null) {
 			request.setAttribute("err", "Please fill in all fields");
 			request.setAttribute("tempName", name);
 			request.setAttribute("tempBrief", briefDescription);
 			request.setAttribute("tempFull", fullDescription);
+			request.setAttribute("tempStart", start);
+			request.setAttribute("tempEnd", end);
+			request.setAttribute("tempLocation", location);
 			request.setAttribute("tempPrice", priceStr);
 			request.setAttribute("tempSlots", slotsStr);
+			request.setAttribute("tempBought", boughtStr);
 			request.setAttribute("tempCatID", catIDStr);
 			request.setAttribute("tempImage", image);
 			RequestDispatcher rd = request.getRequestDispatcher("adminInsert.jsp");
@@ -56,11 +69,12 @@ public class adminInsert extends HttpServlet {
 		}
 		
 		double price = Double.parseDouble(priceStr);
+		int bought = Integer.parseInt(boughtStr);
 		int slots = Integer.parseInt(slotsStr);
 		int catID = Integer.parseInt(catIDStr);
 		
 		AdminService adminService = new AdminService();
-		int numRowsAffected = adminService.adminInsert(name, briefDescription, fullDescription, price, slots, catID, image);
+		int numRowsAffected = adminService.adminInsert(name, briefDescription, fullDescription, start, end, location, price, slots, bought, catID, image);
 		
 		if(numRowsAffected > 0) {
 			request.setAttribute("successMsg", "Tour Successsfully Added");
