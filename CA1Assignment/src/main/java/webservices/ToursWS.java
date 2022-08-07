@@ -16,6 +16,10 @@ public class ToursWS {
 		TourService tourService = new TourService();
 		List<Tour> tours = tourService.getAllTours();
 		
+		if(tours == null) {
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+		}
+		
 		String[] tourJSONString = new String[tours.size()];
 		
 		for (int i = 0; i < tours.size(); i++) {
