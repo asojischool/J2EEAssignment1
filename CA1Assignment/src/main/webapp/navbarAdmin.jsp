@@ -29,7 +29,7 @@ body {
 					<li class="nav-item"><a class="nav-link" href="customer.jsp">Users</a></li>
 				</ul>
 				<%
-				if (session.getAttribute("sessUser") != null && (Boolean) session.getAttribute("authenticated") == true) {
+				if (session.getAttribute("sessID") != null ) {
 				%>
 
 				<ul class="navbar-nav ms-auto">
