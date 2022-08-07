@@ -73,6 +73,13 @@
 						<div id="message" class="alert alert-danger" role="alert"><%= err %></div>
 					<%
 					}
+					
+					String success = (String) request.getAttribute("successMsg");
+					if (success != null) {
+					%>
+						<div id="message" class="alert alert-success" role="alert"><%= success %></div>
+					<%
+					}
 					%>
 					
 					<form action="verifyUser" method="post">
