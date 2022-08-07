@@ -15,7 +15,7 @@ public class TourService {
 
 			Statement stmt = conn.createStatement();
 
-			String sqlStr = "SELECT * FROM tours";
+			String sqlStr = "SELECT * FROM tour";
 
 			ResultSet rs = stmt.executeQuery(sqlStr);
 			// check resultset
@@ -49,6 +49,7 @@ public class TourService {
 				tour.setImage(dbImage);
 				
 				tours.add(tour);
+				System.out.println(tour.getTourID());
 			}
 
 			conn.close();
