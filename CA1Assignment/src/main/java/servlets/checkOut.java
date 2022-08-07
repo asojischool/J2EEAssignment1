@@ -47,6 +47,10 @@ public class checkOut extends HttpServlet {
 			
 			String currency = request.getParameter("currency");
 			String totalCost = request.getParameter("totalCost");
+			if (currency == null || totalCost == null) {
+				response.sendRedirect("cart.jsp");
+				return;
+			}
 			
 			long price = 0L;
 			
