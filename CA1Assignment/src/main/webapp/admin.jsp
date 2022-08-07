@@ -24,19 +24,29 @@ body {
 <body>
 	<%@page import="servlets.adminView"%>
 	<%@page import="models.AdminService"%>
+	<%@page import="models.UserService"%>
 	<%@page import="models.User"%>
 
-	<%-- <%
-	User user = (User) session.getAttribute("sessUser");
-	if (user == null) {
-		response.sendRedirect("home.jsp");
-	} else {
-		String userRole = user.getRole();
-		if (!(userRole.equals("admin"))) {
-			response.sendRedirect("home.jsp");
+	<% 
+	Integer userID = (Integer) session.getAttribute("sessID");
+
+	if (userID == null) {
+		request.setAttribute("errMsg", "Please login as Administrator");
+		RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
+		rd.forward(request, response);
+		return;
+	}
+	else {
+		UserService userService = new UserService();
+		User user = userService.getUserByID(userID);
+		if (user.getRole().equals("admin")) {
+			request.setAttribute("errMsg", "Please login as Administrator");
+			RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
+			rd.forward(request, response);
+			return;
 		}
 	}
-	%> --%>
+	%>
 	<%
 		String err = (String) request.getAttribute("err");
 		if (err != null) {
