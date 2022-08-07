@@ -313,4 +313,50 @@ public class AdminService {
 		
 		return tours;
 	}
+	
+	public ArrayList<Tour> popularTour() {
+		ArrayList<Tour> tours = new ArrayList<Tour>();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
+			Connection conn = DriverManager.getConnection(connURL);
+			Statement stmt = conn.createStatement();
+			String sqlStr = "SELECT * FROM tour ORDER BY tours_bought DESC";
+			PreparedStatement ps = conn.prepareStatement(sqlStr);;
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				int dbID = rs.getInt("tour_id");
+				String dbName = rs.getString("tour_name");
+				String dbBrief = rs.getString("brief_description");
+				String dbFull = rs.getString("detail_description");
+				String dbStart = rs.getString("start_date");
+				String dbEnd = rs.getString("end_date");
+				String dbLocation = rs.getString("location");
+				Double dbPrice = rs.getDouble("price");
+				int dbSlots = rs.getInt("available_slots");
+				int dbBought = rs.getInt("tours_bought");
+				int dbCatID = rs.getInt("tour_category_id");
+				String dbImage = rs.getString("image_location");
+				Tour tour = new Tour();
+				tour.setTourID(dbID);
+				tour.setTourName(dbName);
+				tour.setBriefDescription(dbBrief);
+				tour.setFullDescription(dbFull);
+				tour.setStartDate(dbStart);
+				tour.setEndDate(dbEnd);
+				tour.setLocation(dbLocation);
+				tour.setPrice(dbPrice);
+				tour.setAvailableSlots(dbSlots);
+				tour.setToursBought(dbBought);
+				tour.setCategoryID(dbCatID);
+				tour.setImage(dbImage);
+				tours.add(tour);
+			}
+			conn.close();
+			} catch (Exception e) {
+			System.err.println("Error :" + e);
+			}
+		
+		return tours;
+	}
 }

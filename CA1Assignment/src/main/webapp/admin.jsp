@@ -72,6 +72,10 @@ body {
 			 <input type="submit" name="submit" value="Search By Tour Name">
 			<input type="submit" name="submit" value="Search By Location">
 		</form>
+		<form action="tourInquiry">
+			<input class="btn btn-success fs-5" type="submit"
+				value="Sort By Popularity">
+		</form>
 	</div>
 
 	<div class="container">
