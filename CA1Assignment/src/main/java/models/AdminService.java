@@ -59,23 +59,27 @@ public class AdminService {
 			}
 		return numRowsAffected;
 	}
-	public int adminUpdate(int id, String name, String briefDescription, String fullDescription, double price, int slots, int catID, String image) {
+	public int adminUpdate(int id, String name, String briefDescription, String fullDescription, String start, String end, String location, double price, int slots, int bought, int catID, String image) {
 		int numRowsAffected = 0;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
 			Connection conn = DriverManager.getConnection(connURL);
 			Statement stmt = conn.createStatement();
-			String sqlStr = "Update tour SET tour_name=?, brief_description=?, detail_description=?, price=?, available_slots=?, tour_category_id=?, image_location=? WHERE tour_id=?";
+			String sqlStr = "Update tour SET tour_name=?, brief_description=?, detail_description=?, start_date=?, end_date=?, location=?, price=?, available_slots=?, tour_bought=?, tour_category_id=?, image_location=? WHERE tour_id=?";
 			PreparedStatement ps = conn.prepareStatement(sqlStr);
 			ps.setString(1,name);
 			ps.setString(2,briefDescription);
 			ps.setString(3,fullDescription);
-			ps.setDouble(4,price);
-			ps.setInt(5,slots);
-			ps.setInt(6,catID);
-			ps.setString(7,image);
-			ps.setInt(8,id);
+			ps.setString(4,start);
+			ps.setString(5,end);
+			ps.setString(6,location);
+			ps.setDouble(7,price);
+			ps.setInt(8,slots);
+			ps.setInt(9,bought);
+			ps.setInt(10,catID);
+			ps.setString(11,image);
+			ps.setInt(12,id);
 			numRowsAffected = ps.executeUpdate();
 			conn.close();
 			} catch (Exception e) {
@@ -83,22 +87,26 @@ public class AdminService {
 			}
 		return numRowsAffected;
 	}
-	public int adminInsert(String name, String briefDescription, String fullDescription, double price, int slots, int catID, String image) {
+	public int adminInsert(String name, String briefDescription, String fullDescription, String start, String end, String location, double price, int slots, int bought, int catID, String image) {
 		int numRowsAffected = 0;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
 			Connection conn = DriverManager.getConnection(connURL);
 			Statement stmt = conn.createStatement();
-			String sqlStr = "INSERT INTO tour (tour_name, brief_description, detail_description, price, available_slots, tour_category_id, image_location) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			String sqlStr = "INSERT INTO tour (tour_name, brief_description, detail_description, start_date, end_date, location, price, available_slots, tour_bought, tour_category_id, image_location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = conn.prepareStatement(sqlStr);
 			ps.setString(1, name);
 			ps.setString(2, briefDescription);
 			ps.setString(3, fullDescription);
-			ps.setDouble(4, price);
-			ps.setInt(5, slots);
-			ps.setInt(6, catID);
-			ps.setString(7, image);
+			ps.setString(4, start);
+			ps.setString(5, end);
+			ps.setString(6, location);
+			ps.setDouble(7, price);
+			ps.setInt(8, slots);
+			ps.setInt(9, bought);
+			ps.setInt(10, catID);
+			ps.setString(11, image);
 			numRowsAffected = ps.executeUpdate();
 			conn.close();
 			} catch (Exception e) {
@@ -223,7 +231,7 @@ public class AdminService {
 	}
 	
 	public ArrayList<User> searchUserByArea(String search) {
-ArrayList<User> users = new ArrayList<User>();
+		ArrayList<User> users = new ArrayList<User>();
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -256,5 +264,53 @@ ArrayList<User> users = new ArrayList<User>();
 			}
 		
 		return users;
+	}
+	
+	public ArrayList<Tour> searchTourByName(String search) {
+		ArrayList<Tour> tours = new ArrayList<Tour>();
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
+			Connection conn = DriverManager.getConnection(connURL);
+			Statement stmt = conn.createStatement();
+			String sqlStr = "SELECT * FROM tour where tour_name=?";
+			PreparedStatement ps = conn.prepareStatement(sqlStr);
+			ps.setString(1,search);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				int dbID = rs.getInt("tour_id");
+				String dbName = rs.getString("tour_name");
+				String dbBrief = rs.getString("brief_description");
+				String dbFull = rs.getString("detail_description");
+				String dbStart = rs.getString("start_date");
+				String dbEnd = rs.getString("end_date");
+				String dbLocation = rs.getString("location");
+				Double dbPrice = rs.getDouble("price");
+				int dbSlots = rs.getInt("available_slots");
+				int dbBought = rs.getInt("tours_bought");
+				int dbCatID = rs.getInt("tour_category_id");
+				String dbImage = rs.getString("image_location");
+				Tour tour = new Tour();
+				tour.setTourID(dbID);
+				tour.setTourName(dbName);
+				tour.setBriefDescription(dbBrief);
+				tour.setFullDescription(dbFull);
+				tour.setStartDate(dbStart);
+				tour.setEndDate(dbEnd);
+				tour.setLocation(dbLocation);
+				tour.setPrice(dbPrice);
+				tour.setAvailableSlots(dbSlots);
+				tour.setToursBought(dbBought);
+				tour.setCategoryID(dbCatID);
+				tour.setImage(dbImage);
+				tours.add(tour);
+			}
+			conn.close();
+			} catch (Exception e) {
+			System.err.println("Error :" + e);
+			}
+		
+		return tours;
 	}
 }

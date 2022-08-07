@@ -57,8 +57,12 @@
 		String tempName = (String) request.getAttribute("tempName");
 		String tempBrief = (String) request.getAttribute("tempBrief");
 		String tempFull = (String) request.getAttribute("tempFull");
+		String tempStart = (String) request.getAttribute("tempStart");
+		String tempEnd = (String) request.getAttribute("tempEnd");
+		String tempLocation = (String) request.getAttribute("tempLocation");
 		String tempPrice = (String) request.getAttribute("tempPrice");
 		String tempSlots = (String) request.getAttribute("tempSlots");
+		String tempBought = (String) request.getAttribute("tempBought");
 		String tempCatID = (String) request.getAttribute("tempCatID");
 		String tempImage = (String) request.getAttribute("tempImage");
 		if (tempName == null){
@@ -70,11 +74,23 @@
 		if (tempFull == null){
 			tempFull = "";
 		} 
+		if (tempStart == null){
+			tempStart = "";
+		} 
+		if (tempEnd == null){
+			tempEnd = "";
+		} 
+		if (tempLocation == null){
+			tempLocation = "";
+		} 
 		if (tempPrice == null){
 			tempPrice = "";
 		} 
 		if (tempSlots == null){
 			tempSlots = "";
+		} 
+		if (tempBought == null){
+			tempBought = "";
 		} 
 		if (tempCatID == null){
 			tempCatID = "";
@@ -104,12 +120,28 @@
 					<td class="box shadow bg-white p-4"><input type="text" name="fullDescription" value="<%=tempFull %>"></td>
 				</tr>
 				<tr class="col-md-5">
+					<td class="box shadow bg-white p-4">Start Date</td>
+					<td class="box shadow bg-white p-4"><input type="text" name="start" value="<%=tempStart %>"></td>
+				</tr>
+				<tr class="col-md-5">
+					<td class="box shadow bg-white p-4">End Date</td>
+					<td class="box shadow bg-white p-4"><input type="text" name="end" value="<%=tempEnd %>"></td>
+				</tr>
+				<tr class="col-md-5">
+					<td class="box shadow bg-white p-4">Location</td>
+					<td class="box shadow bg-white p-4"><input type="text" name="location" value="<%=tempLocation %>"></td>
+				</tr>
+				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Price</td>
 					<td class="box shadow bg-white p-4"><input type="number" name="price" value="<%=tempPrice %>"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Available Slots</td>
 					<td class="box shadow bg-white p-4"><input type="number" name="slots" value="<%=tempSlots %>"></td>
+				</tr>
+				<tr class="col-md-5">
+					<td class="box shadow bg-white p-4">Tours Bought</td>
+					<td class="box shadow bg-white p-4"><input type="text" name="bought" value="<%=tempBought %>"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Category ID</td>

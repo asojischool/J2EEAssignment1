@@ -62,9 +62,17 @@ body {
 	
 	String full = request.getParameter("full");
 	
+	String start = request.getParameter("start");
+	
+	String end = request.getParameter("end");
+	
+	String location = request.getParameter("location");
+	
 	String price = request.getParameter("price");
 	
 	String slots = request.getParameter("slots");
+	
+	String bought = request.getParameter("bought");
 	
 	String catID = request.getParameter("catID");
 	
@@ -102,6 +110,21 @@ body {
 						value="<%=full%>" name="fullDescription"></td>
 				</tr>
 				<tr class="col-md-5">
+					<td class="box shadow bg-white p-4">Start Date</td>
+					<td class="box shadow bg-white p-4"><input type="text"
+						value="<%=start%>" name="start"></td>
+				</tr>
+				<tr class="col-md-5">
+					<td class="box shadow bg-white p-4">End Date</td>
+					<td class="box shadow bg-white p-4"><input type="text"
+						value="<%=end%>" name="end"></td>
+				</tr>
+				<tr class="col-md-5">
+					<td class="box shadow bg-white p-4">Location</td>
+					<td class="box shadow bg-white p-4"><input type="text"
+						value="<%=location%>" name="location"></td>
+				</tr>
+				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Price</td>
 					<td class="box shadow bg-white p-4"><input type="number"
 						value="<%=price%>" name="price"></td>
@@ -110,6 +133,11 @@ body {
 					<td class="box shadow bg-white p-4">Available Slots</td>
 					<td class="box shadow bg-white p-4"><input type="number"
 						value="<%=slots%>" name="slots"></td>
+				</tr>
+				<tr class="col-md-5">
+					<td class="box shadow bg-white p-4">Tour Bought</td>
+					<td class="box shadow bg-white p-4"><input type="text"
+						value="<%=bought%>" name="bought"></td>
 				</tr>
 				<tr class="col-md-5">
 					<td class="box shadow bg-white p-4">Category ID</td>
