@@ -52,6 +52,10 @@
 			 <input type="submit" name="submit" value="Search By Name">
 			<input type="submit" name="submit" value="Search By Residential Area">
 		</form>
+		<form action="userInquiry">
+			<input class="btn btn-success fs-5" type="submit"
+				value="Show Amount Spent">
+		</form>
 	</div>
 	
 	<div class="container">

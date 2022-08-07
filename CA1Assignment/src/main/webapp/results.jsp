@@ -24,5 +24,11 @@
 	
 		out.print(str);
 	%>
+	
+	<div>
+		<form action="admin.jsp">
+			<input class="btn btn-primary fs-5" type="submit" value="Back To Home">
+		</form>
+	</div>
 </body>
 </html>
