@@ -15,7 +15,29 @@
 <body>
 	<%@page import="servlets.allUser"%>
 	<%@page import="models.UserService"%>
-	<%@page import="models.User"%>
+	<%@page import="models.UserService" %>
+	<%@page import="models.User" %>
+	
+	<% 
+	Integer userID = (Integer) session.getAttribute("sessID");
+
+	if (userID == null) {
+		request.setAttribute("errMsg", "Please login as Administrator");
+		RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
+		rd.forward(request, response);
+		return;
+	}
+	else {
+		UserService userService = new UserService();
+		User user = userService.getUserByID(userID);
+		if (!user.getRole().equals("admin")) {
+			request.setAttribute("errMsg", "Please login as Administrator");
+			RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
+			rd.forward(request, response);
+			return;
+		}
+	}
+	%>
 	
 	<%
 		UserService userService = new UserService();

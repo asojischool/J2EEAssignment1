@@ -39,7 +39,7 @@ body {
 	else {
 		UserService userService = new UserService();
 		User user = userService.getUserByID(userID);
-		if (user.getRole().equals("admin")) {
+		if (!user.getRole().equals("admin")) {
 			request.setAttribute("errMsg", "Please login as Administrator");
 			RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
 			rd.forward(request, response);

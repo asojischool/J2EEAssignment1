@@ -27,18 +27,9 @@
 <body>
 
 	<%@page import="models.User" %>
+	<%@page import="models.UserService" %>
 	
-	<%-- <%
-	User user = (User) session.getAttribute("sessUser");
-	if (user == null) {
-		response.sendRedirect("home.jsp");
-	} else {
-		String userRole = user.getRole();
-		if (!(userRole.equals("admin"))) {
-			response.sendRedirect("home.jsp");
-		}
-	}
-	%> --%>
+	<%@page import="models.User"%>
 	
 	<%
 		String image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEjP5eJ4WIGuhEMAXpp2M11odo9HItPz3c3fAvPNzu_0nEXyeP";
