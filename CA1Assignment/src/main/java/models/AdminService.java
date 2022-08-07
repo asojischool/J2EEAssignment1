@@ -359,4 +359,37 @@ public class AdminService {
 		
 		return tours;
 	}
+	
+	public ArrayList<User> userList() {
+		ArrayList<User> users = new ArrayList<User>();
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver"); 
+			String connURL = "jdbc:mysql://localhost/tours?user=root&password=696969&serverTimezone=UTC";
+			Connection conn = DriverManager.getConnection(connURL);
+			Statement stmt = conn.createStatement();
+			String sqlStr = "SELECT * FROM user";
+			ResultSet rs = stmt.executeQuery(sqlStr);
+			while (rs.next()) {
+				int dbID = rs.getInt("user_id");
+				String dbUsername = rs.getString("username");
+				String dbPassword = rs.getString("password");
+				String dbRole = rs.getString("role");
+				String dbEmail = rs.getString("email");
+				String dbArea = rs.getString("residential_area");
+				User user = new User();
+				user.setUser_id(dbID);
+				user.setUsername(dbUsername);
+				user.setPassword(dbPassword);
+				user.setRole(dbRole);
+				user.setEmail(dbEmail);
+				user.setResidentialArea(dbArea);
+				users.add(user);
+			}
+			conn.close();
+			} catch (Exception e) {
+				System.err.println("Error :" + e);
+			}
+		return users;
+	}
 }
