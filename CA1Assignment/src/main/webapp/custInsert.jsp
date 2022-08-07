@@ -16,6 +16,7 @@
 
 	<%@page import="models.UserService" %>
 	<%@page import="models.User" %>
+	<%@include file="navbarAdmin.jsp"%>
 	
 	<% 
 	Integer userID = (Integer) session.getAttribute("sessID");
