@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class UserService {
 	public User verifyUser(String username, String password) {
 		
-		User user = new User();
+		User user = null;
 		Connection conn = null;
 		
 		try {
@@ -38,6 +38,7 @@ public class UserService {
 	        }
 	        
 	        if(username.equals(dbName) && password.equals(dbPassword)) {
+	        	user = new User();
 	        	user.setUser_id(dbID);
 				user.setUsername(dbName);
 				user.setPassword(dbPassword);
@@ -110,7 +111,7 @@ public class UserService {
 	
 	public User getUserByID (int userID) {
 		
-		User loggedInUser = new User();
+		User loggedInUser = null;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -138,6 +139,7 @@ public class UserService {
 	    	    dbEmail = rs.getString("email");
 	    	    dbResidentialArea = rs.getString("residential_area");
 
+	    	    loggedInUser = new User();
 	    	    loggedInUser.setUser_id(dbID);
 				loggedInUser.setUsername(dbName);
 				loggedInUser.setPassword(dbPassword);

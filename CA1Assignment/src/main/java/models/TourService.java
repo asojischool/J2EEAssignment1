@@ -119,7 +119,7 @@ public class TourService {
 	
 	public Tour getDetailedTour(int tourID) {
 
-		Tour detailedTour = new Tour();
+		Tour detailedTour = null;
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -147,6 +147,8 @@ public class TourService {
 				int dbToursBought = rs.getInt("tours_bought");
 				int dbCategoryID = rs.getInt("tour_category_id");
 				String dbImage = rs.getString("image_location");
+				
+				detailedTour = new Tour();
 				
 				detailedTour.setTourID(dbID);
 				detailedTour.setTourName(dbName);
