@@ -46,22 +46,23 @@ public class updateProfile extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
+		String residentialArea = request.getParameter("residentialArea");
 		
-		if(username == null || password == null || email == null || username.equals("") || password.equals("") || email.equals("")) {
+		if(username == null || password == null || email == null || residentialArea == null || username.equals("") || password.equals("") || email.equals("") || residentialArea.equals("")) {
 			request.setAttribute("err", "Please enter your username/password/email");
 			RequestDispatcher rd = request.getRequestDispatcher("profile.jsp");
 			rd.forward(request, response);
 			return;
 		}
 		
-		if(username.equals(user.getUsername()) && password.equals(user.getPassword()) && email.equals(user.getEmail())) {
+		if(username.equals(user.getUsername()) && password.equals(user.getPassword()) && email.equals(user.getEmail()) && residentialArea.equals(user.getResidentialArea())) {
 			request.setAttribute("err", "Nothing is updated");
 			RequestDispatcher rd = request.getRequestDispatcher("profile.jsp");
 			rd.forward(request, response);
 			return;
 		}
 		
-		int numRowsAffected = userService.updateUser(username, password, email, userID);
+		int numRowsAffected = userService.updateUser(username, password, email, userID, residentialArea);
 		
 		if(numRowsAffected > 0) {
 			request.setAttribute("success", "Profile Update Successful");

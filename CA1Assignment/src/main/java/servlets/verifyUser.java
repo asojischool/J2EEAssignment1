@@ -84,16 +84,12 @@ public class verifyUser extends HttpServlet {
 			request.setAttribute("successMsg", "Login Successful");
 			
 			if (userRole.equals("admin")) {
-				session.setAttribute("sessRole", userRole);
 				session.setAttribute("sessID", userID);
-				session.setAttribute("authenticated", true);
 				RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
 				rd.forward(request, response);
 				return;
 			} else if (userRole.equals("member")) {
-				session.setAttribute("sessRole", userRole);
 				session.setAttribute("sessID", userID);
-				session.setAttribute("authenticated", true);
 				RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
 				rd.forward(request, response);
 				return;
