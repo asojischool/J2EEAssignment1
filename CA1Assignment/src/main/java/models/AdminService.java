@@ -18,18 +18,35 @@ public class AdminService {
 			while (rs.next()) {
 				int dbID = rs.getInt("tour_id");
 				String dbName = rs.getString("tour_name");
-				String dbBriefDescription = rs.getString("brief_description");
-				String dbFullDescription = rs.getString("detail_description");
-				double dbPrice = rs.getDouble("price");
-				int dbAvailableSlots = rs.getInt("available_slots");
-				int dbCategoryID = rs.getInt("tour_category_id");
+				String dbBrief = rs.getString("brief_description");
+				String dbFull = rs.getString("detail_description");
+				String dbStart = rs.getString("start_date");
+				String dbEnd = rs.getString("end_date");
+				String dbLocation = rs.getString("location");
+				Double dbPrice = rs.getDouble("price");
+				int dbSlots = rs.getInt("available_slots");
+				int dbBought = rs.getInt("tours_bought");
+				int dbCatID = rs.getInt("tour_category_id");
 				String dbImage = rs.getString("image_location");
-//				tours.add(new Tour(dbID, dbName, dbBriefDescription, dbFullDescription, dbPrice, dbAvailableSlots,
-//						dbCategoryID, dbImage));
+				Tour tour = new Tour();
+				tour.setTourID(dbID);
+				tour.setTourName(dbName);
+				tour.setBriefDescription(dbBrief);
+				tour.setFullDescription(dbFull);
+				tour.setStartDate(dbStart);
+				tour.setEndDate(dbEnd);
+				tour.setLocation(dbLocation);
+				tour.setPrice(dbPrice);
+				tour.setAvailableSlots(dbSlots);
+				tour.setToursBought(dbBought);
+				tour.setCategoryID(dbCatID);
+				tour.setImage(dbImage);
+				tours.add(tour);
 				tourStr += "<tr><td class=\"box shadow bg-white p-4\">" + dbID + "</td><td class=\"box shadow bg-white p-4\">" + dbName +
 						"</td><td class=\"box shadow bg-white p-4\"><form action=\"adminEdit.jsp?id=" + 
-						dbID + "&name=" + dbName + "&brief=" + dbBriefDescription + "&full=" + dbFullDescription + 
-						"&price=" + dbPrice + "&slots=" + dbAvailableSlots + "&catID=" + dbCategoryID + "&image=" + dbImage +
+						dbID + "&name=" + dbName + "&brief=" + dbBrief + "&full=" + dbFull + "&start=" +
+						dbStart + "&end=" + dbEnd + "&location=" + dbLocation + "&price=" + dbPrice +
+						"&slots=" + dbSlots + "&bought=" + dbBought + "&catID=" + dbCatID + "&image=" + dbImage +
 						"\" method=\"post\"><input type=\"submit\" value=\"edit\"></form></td></tr>";
 			}
 			tourStr += "</table>";

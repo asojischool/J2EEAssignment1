@@ -67,7 +67,8 @@ body {
 
 	<%
 	AdminService adminService = new AdminService();
-	String tourStr = adminService.adminView();
+	String tourStr = adminService.adminView(); 
+	
 	%>
 
 	<%@include file="navbarAdmin.jsp"%>
