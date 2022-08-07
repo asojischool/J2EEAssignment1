@@ -29,7 +29,7 @@ public class OrderService {
 				String dbTourName = rs.getString("tour_name");
 				double dbPrice = rs.getDouble("price");
 				int dbQuantity = rs.getInt("quantity");
-				String dbDate = rs.getString("date");
+				String dbDate = rs.getString("created_at");
 				
 				Order order = new Order();
 				order.setTourName(dbTourName);
